@@ -56,15 +56,35 @@ _Ana_Çözumler:_
 - Github
 - Ubuntu (Canonical)
 - Dropbox
-- ve daha fazlasi: https://github.com/golang/go/wiki/GoUsers
+- ve daha fazlası: https://github.com/golang/go/wiki/GoUsers
 
-* Go'nun temel özellikleri 0 (Dilin genel yapısı)
+* Ilk Go uygulamamız
+
+
+- Her Go uygulaması `package` ile adlandırdığımız yapılardan oluşuyor. 
+- Bir uygulama `main` paketi ile ayağa kalkar ve çalışır.
+- Başka paketleri kullanabilmek icin `import` ile eklemek gerekiyor.
+- Baş harfi büyük karakter ile başlayan tanımlamaları kullanabiliyorsunuz.  Paketin içindeki büyük harfle başlamayan her şey gizli ve kullanılamaz.
+
+Örnek:
 
 .play code/main.go
 
-* Go'nun temel özellikleri 1 (static typed, channels, concurrency, interfaces, ...)
-* Go'nun temel özellikleri 2 (testing, bencharmarking, profiling, ... )
-* Go'nun temel özellikleri 3 (human scalable, simplicity, az özelligi olmasi ...)
+
+* Ilk Go uygulamamiz (devamı ...)
+
+Başka bir örnek:
+
+.play code/data/data.go
+
+* Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler
+
+.play code/vars/vars.go /START OMIT/,/END OMIT/
+
+* For döngüleri
+
+.play code/for/for.go /START OMIT/,/END OMIT/
+
 * Go araçlari (go get, gofmt, go test, golint, vs...)
 * Koding'de Go nasil kullanılıyor? Deploy nasıl yapılır?
 * Editör desteği ve uyumluluğu
