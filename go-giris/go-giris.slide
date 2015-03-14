@@ -7,9 +7,11 @@ https://github.com/fatih
 fatih@arslan.io
 @ftharsln
 
+* Giriş
+
 * Go nedir?
 
-- Ken Thompson, Rob Pike ve Robert Griesiemer tarafindan ilk adımlari atıldı (2007)
+- Ken Thompson, Rob Pike ve Robert Griesiemer tarafindan ilk adımları atıldı (2007)
 - 10 Kasım 2009 yılında tanıtıldı, 28 Mart 2012'da Go 1.0 yayımlandı
 - Genç ve yeni bir dil
 - Açık Kaynak
@@ -51,7 +53,7 @@ sorunlar?
 
 - Büyük bir Go programini saniyeler içinde derleyebiliyorsunuz
 - Sözdizimi (syntax) anlaşılır
-- Temelleri basitlik üzerine kurulan bir düşünce yapısI
+- Temelleri basitlik üzerine kurulan bir düşünce yapısı
 - Bağımlılık çözümu kolay ve basit (C tipi include dosyalari olmaksızın)
 - Dahili eşzaman  yazılım temelleri (channels, goroutines, select)
 - Static typed ama dynamic typed gibi hissediliyor
@@ -71,18 +73,97 @@ sorunlar?
 - Dropbox
 - ve daha fazlası: https://github.com/golang/go/wiki/GoUsers
 
-* Ilk Go uygulamamız
+* Paketler ve Isimlendirme
 
+* Paketler
 
-- Her Go uygulaması `package` ile adlandırdığımız yapılardan oluşuyor. 
-- Bir uygulama `main` paketi ile ayağa kalkar ve çalışır.
-- Başka paketleri kullanabilmek icin `import` ile eklemek gerekiyor.
-- Baş harfi büyük karakter ile başlayan tanımlamaları kullanabiliyorsunuz.  Paketin içindeki büyük harfle başlamayan her şey gizli ve kullanılamaz.
+Her Go uygulaması paketlerden oluşur. 
 
-Örnek:
+Paketler ne içerir ? 
+- Fonksiyon
+- Türler
+- Değişkenler
+- Sabit türler (constants)
+
+Bir paket bir dosya ve 10 satırdan oluşabileceği gibi, onlarca dosya ve
+binlerce satır kod'dan da oluşabilir.
+
+Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
+
+* Main paketi
+
+Main paketi özeldir. 
+
+Bir Go uygulamasi main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
+kendi başına calısmaz
 
 .play code/main.go
 
+
+* Isimlendirme
+
+- Baş harfi *büyük* karakter ile başlayan tanımlamaları kullanabiliyorsunuz (public).  
+- Bas harfi *küçük* karakter ile başlayan tanımlamaları dışarıdan erışemezsiniz (private).
+
+Örnek: 
+
+	var (
+		name    = "example"
+		region  = "asia"
+		Version = "0.0.1"
+	)
+
+	func add(x, y int) int      { return x + y }
+	func Multiply(x, y int) int { return x * y }
+
+	type Color struct{}
+
+	func (c *Color) Red(s string) {}
+	func (c *Color) prepend()     {}
+
+
+
+* Paketlerin kullanımı
+
+Main dışındaki tüm paketler başkaları tarafından kullanılmalı
+
+- package json
+
+Standard library paketlerine doğrudan erişiyorsunuz
+
+- import "fmt"
+- import "encoding/json"
+
+Dahil edilen paketin bir ismini değistirebilirsiniz
+
+- import googlelog "google/base/go/log"
+
+Uzaktaki bir sunucudan paket dahil edebilirsiniz
+
+- import "github.com/streadway/amqp"
+- import "golang.org/x/net/websocket"
+
+* Paketlerin kullanımı 2 
+
+	package main
+
+	import (
+		"fmt"
+
+		"github.com/fatih/color"
+		log "github.com/koding/logging"
+	)
+
+	func main() {
+		fmt.Println("example app")
+
+		color.Red("Error message")
+
+		l := log.NewLogger("app")
+		l.Info("App started")
+	}
+
+* Go sözdizimi ve temel dil yapısı
 
 * Türler
 
@@ -97,8 +178,8 @@ sorunlar?
 Basit akışlar:
 
 - if, else
-- for, break, continue, fallthrough
-- switch
+- for, break, continue
+- switch, case, default, falltrhough
 - return
 - goto
 
@@ -141,6 +222,22 @@ Daha iyi:
 			return
 		}
 	}
+
+* Methods
+* Interfaces
+* Hata yönetimi (errors)
+* Goroutine
+* Channels
+* Range
+* Select
+
+* Araçlar
+* Go tool
+* Godoc
+* Gofmt
+* Test (yazmak)
+* Test (çalıstırmak)
+* Test (ölçmek)
 
 
 * Go araçlari (go get, gofmt, go test, golint, vs...)
