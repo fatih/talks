@@ -9,7 +9,7 @@ import (
 var mu sync.Mutex
 
 func main() {
-	deadlock(4)
+	deadlock(4) // daha büyük bir sayı yazalım
 
 	mu.Lock()
 	fmt.Println("finished")
@@ -18,7 +18,7 @@ func main() {
 
 func deadlock(a int) {
 	mu.Lock()
-	if 5 < a {
+	if 4 < a {
 		return
 	}
 	mu.Unlock()

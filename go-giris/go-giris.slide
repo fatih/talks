@@ -17,14 +17,29 @@ fatih@arslan.io
 - C ailesine yakın dil tanımı
 .image gophers.jpg
 
-* Neden Go?
+* Neden Go? (Sorunlar)
 
 Büyük ölçekteki yazılımlari geliştirmenin zorluğu üzerine çıkmıştir. Nedir bu
-sorunlar?:
+sorunlar?
 
 - Yavaş inşa sistemleri (build systems)
+
+.image compiling.png
+
+* Neden Go? (Sorunlar)
+
 - Kontrol altına alınamayan bağımlılıklar
+
+.image dependencies.jpg
+
+* Neden Go? (Sorunlar)
+
 - Insanlarin bir dilin özelliklerin belirli alt kümelerini kullanması
+
+.image features.jpg
+
+* Neden Go? (Sorunlar)
+
 - Kod'u anlamak ve okumak zor
 - Güncelleme maliyeti
 - Makineler hızlı, ama yazılım geliştirme hala yavaş
@@ -32,9 +47,7 @@ sorunlar?:
 - Google'deki yavaş ve hantal yazılım geliştirme'yi ortadan kaldırmak
 - Büyük ölçekteki yazılımları kontrol altında tutmak
 
-* Neden Go? (devam.)
-
-_Ana_Çözumler:_
+* Neden Go? (Çözumler)
 
 - Büyük bir Go programini saniyeler içinde derleyebiliyorsunuz
 - Sözdizimi (syntax) anlaşılır
@@ -71,25 +84,35 @@ _Ana_Çözumler:_
 .play code/main.go
 
 
-* Ilk Go uygulamamiz (devamı ...)
+* Türler
 
-Başka bir örnek:
-
-.play code/data/data.go
+.play code/data/data.go /START OMIT/,/END OMIT/
 
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler
 
 .play code/vars/vars.go /START OMIT/,/END OMIT/
 
-* For döngüleri
+* Akış kontrolleri
 
-.play -edit code/for/for.go /START OMIT/,/END OMIT/
+Basit akışlar:
 
-* Switch
+- if, else
+- for, break, continue, fallthrough
+- switch
+- return
+- goto
 
-.play -edit code/switch/switch.go 
+Gelişmiş akışlar:
+
+- range
+- select
+- go
+- defer
 
 * Defer
+
+defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
+çalışmasını erteler.
 
 .play code/defer/defer.go
 
@@ -101,7 +124,7 @@ Başka bir örnek:
 
 	func deadlock(a int) {
 		mu.Lock()
-		if 5 < a {
+		if 4 < a {
 			mu.Unlock()
 			return
 		}
@@ -114,11 +137,10 @@ Daha iyi:
 		mu.Lock()
 		defer mu.Unlock()
 
-		if 5 < a {
+		if 4 < a {
 			return
 		}
 	}
-
 
 
 * Go araçlari (go get, gofmt, go test, golint, vs...)
