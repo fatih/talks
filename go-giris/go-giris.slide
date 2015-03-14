@@ -58,8 +58,10 @@ _Ana_Çözumler:_
 - Dropbox
 - ve daha fazlasi: https://github.com/golang/go/wiki/GoUsers
 
-
 * Go'nun temel özellikleri 0 (Dilin genel yapısı)
+
+.play code/main.go
+
 * Go'nun temel özellikleri 1 (static typed, channels, concurrency, interfaces, ...)
 * Go'nun temel özellikleri 2 (testing, bencharmarking, profiling, ... )
 * Go'nun temel özellikleri 3 (human scalable, simplicity, az özelligi olmasi ...)
