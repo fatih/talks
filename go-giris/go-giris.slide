@@ -83,7 +83,43 @@ Başka bir örnek:
 
 * For döngüleri
 
-.play code/for/for.go /START OMIT/,/END OMIT/
+.play -edit code/for/for.go /START OMIT/,/END OMIT/
+
+* Switch
+
+.play -edit code/switch/switch.go 
+
+* Defer
+
+.play code/defer/defer.go
+
+* Defer 2 
+
+.play -edit code/defer2/defer2.go /START OMIT/,/END OMIT/
+
+* Defer 2 (çözüm)
+
+	func deadlock(a int) {
+		mu.Lock()
+		if 5 < a {
+			mu.Unlock()
+			return
+		}
+		mu.Unlock()
+	}
+
+Daha iyi:
+
+	func deadlock(a int) {
+		mu.Lock()
+		defer mu.Unlock()
+
+		if 5 < a {
+			return
+		}
+	}
+
+
 
 * Go araçlari (go get, gofmt, go test, golint, vs...)
 * Koding'de Go nasil kullanılıyor? Deploy nasıl yapılır?

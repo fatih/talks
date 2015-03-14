@@ -4,25 +4,25 @@ import "fmt"
 
 // START OMIT
 func main() {
-	sum := 0
+	a := 0
 	for i := 0; i < 4; i++ {
-		sum += i
+		a += i
 	}
 
-	sum2 := 1
-	for sum2 < 6 {
-		sum2 += sum2
+	b := 1
+	for b < 6 {
+		b += b
 	}
 
-	sum3 := 0
+	c := 0
 	for {
-		sum3++
-		if sum3 == 10 {
+		c++
+		if c == 10 {
 			break
 		}
 	}
 
-	fmt.Printf("%d %d %d\n", sum, sum2, sum3)
+	fmt.Printf("%d %d %d\n", a, b, c)
 }
 
 // END OMIT
