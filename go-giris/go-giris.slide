@@ -7,9 +7,58 @@ https://github.com/fatih
 fatih@arslan.io
 @ftharsln
 
-* Go nedir? Go'nun Tarihçesi.
+* Go nedir?
+
+- Ken Thompson, Rob Pike ve Robert Griesiemer tarafindan ilk adımlari atıldı (2007)
+- 10 Kasım 2009 yılında tanıtıldı, 28 Mart 2012'da Go 1.0 yayımlandı
+- Genç ve yeni bir dil
+- Açık Kaynak
+- Basit ama güçlü
+- C ailesine yakın dil tanımı
+.image gophers.jpg
+
 * Neden Go?
+
+Büyük ölçekteki yazılımlari geliştirmenin zorluğu üzerine çıkmıştir. Nedir bu
+sorunlar?:
+
+- Yavaş inşa sistemleri (build systems)
+- Kontrol altına alınamayan bağımlılıklar
+- Insanlarin bir dilin özelliklerin belirli alt kümelerini kullanması
+- Kod'u anlamak ve okumak zor
+- Güncelleme maliyeti
+- Makineler hızlı, ama yazılım geliştirme hala yavaş
+- Eşzamanlı (concurrent) program geliştırme temelleri bir çok dilde yeterince gelişmemiş
+- Google'deki yavaş ve hantal yazılım geliştirme'yi ortadan kaldırmak
+- Büyük ölçekteki yazılımları kontrol altında tutmak
+
+* Neden Go? (devam.)
+
+_Ana_Çözumler:_
+
+- Büyük bir Go programini saniyeler içinde derleyebiliyorsunuz
+- Sözdizimi (syntax) anlaşılır
+- Temelleri basitlik üzerine kurulan bir düşünce yapısI
+- Bağımlılık çözümu kolay ve basit (C tipi include dosyalari olmaksızın)
+- Dahili eşzaman  yazılım temelleri (channels, goroutines, select)
+- Static typed ama dynamic typed gibi hissediliyor
+- Test, belgelendirme, bağımlılık yönetimi, vs.. ekosistemi
+
+
 * Go'yi kimler kullaniyor?
+
+- Google
+- Apple
+- Facebook
+- Twitter
+- Microsoft
+- Amazon
+- Github
+- Ubuntu (Canonical)
+- Dropbox
+- ve daha fazlasi: https://github.com/golang/go/wiki/GoUsers
+
+
 * Go'nun temel özellikleri 0 (Dilin genel yapısı)
 * Go'nun temel özellikleri 1 (static typed, channels, concurrency, interfaces, ...)
 * Go'nun temel özellikleri 2 (testing, bencharmarking, profiling, ... )
