@@ -173,6 +173,15 @@ Uzaktaki bir sunucudan paket dahil edebilirsiniz
 
 .play code/vars/vars.go /START OMIT/,/END OMIT/
 
+* Zero Values
+
+Her degişken öntanımli olarak o türün sıfır değerini alır.
+
+Basit ama önemli bir özellik.
+
+.play code/zero/zero.go /START OMIT/,/END OMIT/
+
+
 * Akış kontrolleri
 
 Basit akışlar:
@@ -223,7 +232,56 @@ Daha iyi:
 		}
 	}
 
+* Structs
+
+Birden fazla veri ve türü organize etmeye yarar. 
+
+	type MyInt int	
+
+	type Vertex struct {
+		X int
+		Y MyInt
+		Z bool
+	}
+
+Kullanım:
+
+	func main() {
+		v := Vertex{1, 2}
+		v.X = 4
+		fmt.Println(v.X)
+	}
+
 * Methods
+
+Go'da Class yapısı bulunmaz. Ama metodlar ile bir *struct* türüne fonksiyonlar
+tanımlayabilirsiniz.
+
+.play code/methods/methods.go /START OMIT/,/END OMIT/
+
+Metodlar Go'da çok önemli bir yere sahip.
+
+* Methods 2
+
+Metodları tanımladığınız her türe tanımlayabilirsiniz.
+
+	package main
+
+	import "fmt"
+
+	type MyInt int
+
+	func (m MyInt) Add(a int) int {
+		return int(m) + a
+	}
+
+	func main() {
+		var y MyInt = 4
+		res := y.Add(5)
+
+		fmt.Println(res) // res: 9
+	}
+
 * Interfaces
 * Hata yönetimi (errors)
 * Goroutine
