@@ -628,15 +628,62 @@ Tonlarca saat kazandırır insanlara.
 * Test (yazmak)
 * Test (çalıstırmak)
 * Test (ölçmek)
+* Test (örnekler)
 
-
-* Go araçlari (go get, gofmt, go test, golint, vs...)
-* Koding'de Go nasil kullanılıyor? Deploy nasıl yapılır?
 * Editör desteği ve uyumluluğu
-* Go camiasi (go-nuts, irc, go-türkiye ...)
+
+- *Vim:* https://github.com/fatih/vim-go
+- *Emacs:* https://github.com/dominikh/go-mode.el
+- *SublimeText* https://github.com/DisposaBoy/GoSublime
+- *IntelliJ:* https://github.com/go-lang-plugin-org/go-lang-idea-plugin
+- *Eclipse:* https://github.com/GoClipse/goclipse
+- *LiteIDE:* https://github.com/visualfc/liteide
+
+* Nasıl Go öğrenmeye başlayabilirim?
+
+Türkçe turumuz (Ondokuz Mayıs Üniversitesi'nin katkılarıyla)
+
+- http://tur.golang.org.tr/
+
+Go dilinin tüm özellikleri güzel bir şekilde örneklerle anlatan bir site:
+
+- https://gobyexample.com/
+
+Orta ve ileri seviye örnekler, ipucuları
+
+- https://golang.org/doc/effective_go.html
+
+
+* Go camiası (go-nuts, irc, go-türkiye ...)
+
+- Türkçe mail Listesi: https://groups.google.com/forum/#!forum/golang-tr
+- Ingilizce mail listesi: https://groups.google.com/forum/#!forum/golang-nuts
+- Freenode'de *#go-nuts*
+- Twitter'de *#golang* hash tagi kullanılıyor (#go değil!)
+
 * Go ne degildir ve ne icin kullanilmaz
-* Nasil Go ogrenemeye baslayabilirim?
-* Go nasil kurulur?
-* Kaynaklar, kitaplar, öğrenilmesi gerekenler ...
+
+- Araştırma'ya yönelik bir akademik Programlama dili değil (onlar kendini biliyor :))
+- Nesne Yönelimli programlama dili değildir (Object Oriented), ama bir çok dilden bazı özellikleri almıştır.
+- Gömullü sistemler için uygun değil (henüz)
+- Betik dili değil (Python veya Ruby gibi)
+
+* Go nasıl kurulur?
+
+- *Windows:* MSI kurulum dosyasini (mimariye dikkat edin) https://golang.org/dl/ adresinden indirin. Kurduktan sonra ilgili dosyalari `C:\Go` altina koyacakti. `C:\Go\bin` dizini PATH environment değişkenine ekleyin.
+- *OSX:* DMG paketini https://golang.org/dl/ adresinden indirin. Go dağıtımını `/usr/local/go` adresine ekleyecekti. `/usr/local/go/bin` dizinini PATH environment değişkenine ekleyin.
+- *Linux:*  Ilgili paket yöneticisi vasıtasıyla kurun
+- *Linux*(elle):* Ilgili mimari icin arşivi https://golang.org/dl/ adresinden indirin. `/usr/local/go` altına açın. `/usr/local/go/bin`  dizinini PATH environment değişkenini ekleyin: `echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile`.
+
+* Kaynaklar
+
+Slaytı hazırlarken aşağıdaki kaynaklardan faydalandım:
+
+- http://tur.golang.org.tr/
+- https://gobyexample.com/
+- http://talks.golang.org/2012/splash.article
+- http://go-talks.appspot.com/github.com/golang/talks/2012/simple.slide
+- https://github.com/golangmedellin/gotalks
+
 * Soru/Cevap
 
