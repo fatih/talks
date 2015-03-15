@@ -537,8 +537,8 @@ Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 .play -edit code/select/select.go /START OMIT/,/END OMIT/
 
 * Araçlar
-* Go tool
 
+* Go tool
 
 .image gotool.png
 
@@ -611,6 +611,20 @@ Doğrudan terminal'den kullanabilirsiniz:
 	$ godoc github.com/koding/logging
 
 * Gofmt
+
+Go kodunu güzelleştiriyor.
+
+Tum Go core kodu gofmt'lendirildi. Gofmt'siz kod içeriye girmiyor.
+
+Go kodu nasil yazılmalı? sorusunu ortadan kaldırıyor.
+
+Okunuşu iyileştiriyor. Yazmayi iyileştiriyor. 
+
+Tonlarca saat kazandırır insanlara.
+
+.image gofmt.png _ 900
+
+
 * Test (yazmak)
 * Test (çalıstırmak)
 * Test (ölçmek)
