@@ -34,12 +34,6 @@ func main() {
 		// time.Sleep(time.Millisecond * 300)
 		fmt.Println(i)
 	}
-
-	select {
-	case v1 := <-chan1:
-	case chan2 <- v2:
-	default:
-	}
 }
 
 // END OMIT

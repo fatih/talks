@@ -538,6 +538,27 @@ Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 
 * Araçlar
 * Go tool
+
+
+.image gotool.png
+
+* Go tool (devam)
+
+Go kodunu inşa etmek ve kurmak icin `go` aracı kullanmak gerekiyor
+
+Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştiriyor:
+
+	$ go run hello.go
+
+Mevcut klasördeki paketi derleyip kurmak için:
+
+	$ go install
+
+Go aracı diğer tum Go araçları için aynı zamanda bir proxy görevi yapiyor. Yani
+onun sayesinde diğer gerekli araçları çağırabilirsiniz (örneğin: go tool
+pprof).
+
+
 * Godoc
 * Gofmt
 * Test (yazmak)
