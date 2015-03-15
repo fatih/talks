@@ -542,7 +542,7 @@ Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 
 .image gotool.png
 
-* Go tool (devam)
+* Go tool (paket derleme)
 
 Go kodunu inşa etmek ve kurmak icin `go` aracı kullanmak gerekiyor
 
@@ -559,7 +559,57 @@ onun sayesinde diğer gerekli araçları çağırabilirsiniz (örneğin: go tool
 pprof).
 
 
+* Go tool (import path)
+
+Import path'leri URL şeklinde olabilir:
+
+	import "github.com/fatih/structs"
+	import "golang.org/x/net/websocket"
+
+Indirmek için `go` aracını kullanabiliriz:
+
+	$ go get github.com/fatih/structs
+
+"go get" sırayla şunları sizin için yapıyor:
+
+- Git reposunden GOPATH/src/github.com/fatih/structs olarak indiriyor
+- Tum paketi derliyor ve kuruyor
+- Eger "-u" parametresini verirseniz paketi güncelliyor
+
 * Godoc
+
+`godoc` kodun içinde yer alan belgelendirmeyi çekip çeşitli şekillerde sunuyor.
+
+Yorum (*comment*) olarak ilgili tanımlamanın üst kısmına eklenmesi. 
+
+	// Println formats using the default formats for its operands and
+	// writes to standard output.  Spaces are always added between operands
+	// and a newline is appended.  It returns the number of bytes written
+	// and any write error encountered.
+	func Println(a ...interface{}) (n int, err error) {
+		return Fprintln(os.Stdout, a...)
+	}
+
+.image godoc.png
+
+Kodun içinde yer alan belgelendirme'nin bakımı daha kolaydır.
+
+* Godoc (devam)
+
+godoc.org online olarak bakabilirsiniz
+
+	http://godoc.org/fmt#Println
+	http://godoc.org/github.com/fatih/structs
+
+Çevrimdışı bir sunucu çalıştırabilirsiniz
+
+	$ godoc -http:6060
+
+Doğrudan terminal'den kullanabilirsiniz:
+
+	$ godoc fmt
+	$ godoc github.com/koding/logging
+
 * Gofmt
 * Test (yazmak)
 * Test (çalıstırmak)
