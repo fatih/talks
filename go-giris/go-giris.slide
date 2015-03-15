@@ -222,7 +222,7 @@ Basit akışlar:
 
 - if, else
 - for, break, continue
-- switch, case, default, falltrhough
+- switch, case, default, fallthrough
 - return
 - goto
 
