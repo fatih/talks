@@ -16,7 +16,6 @@ fatih@arslan.io
 - Genç ve yeni bir dil
 - Açık Kaynak
 - Basit ama güçlü
-- C ailesine yakın dil tanımı
 .image gophers.jpg
 
 * Neden Go? (Sorunlar)
@@ -277,9 +276,18 @@ Fonksiyonlar da bir türdür
 
 Anonymous fonksiyonlar
 
+	fn := func(text string) {
+		fmt.Println(text)
+	}
+
+	fn("golang")
+
+	foo(fn, 123)
+
+
 * Fonksiyonlar (devam)
 
-Runnable bir örnek ekle
+.play code/funcs/funcs.go /START OMIT/,/END OMIT/
 
 * Structs
 
