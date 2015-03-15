@@ -426,6 +426,12 @@ Windows ANSI desteklemiyor. Çözum:
 
 .image color.png
 
+
+* Concurrency (Eşzamanlılık)
+
+* Concurrency
+.image concurrency.jpg
+
 * Goroutine
 
 Goroutine eş zamanlı olarak başka fonksiyonlar ile çalışabilen fonksiyonlara
@@ -441,9 +447,12 @@ Main fonksiyon'u ilk *goroutine* olarak başlangıç adımını yapar.
 
 * Goroutine (devam)
 
-Öntanımlı olarak her fonksiyon çağrı **blocking*
+Öntanımlı olarak her fonksiyon çağrısı **blocking*
+
+*Nonblocking* yapmak için tek yapmamız gereken önüne *go* keywordunu yerleştirmek.
 
 .play -edit code/goroutine/goroutine.go /START OMIT/,/END OMIT/
+
 
 * Channels
 * Range
