@@ -519,6 +519,23 @@ Range keywordu bir çok veri yapısı için kullanıllır
 
 * Select
 
+*select* deyimi bir "goroutine"nin birden fazla iletişim işleminde beklemesine
+izin verir.
+
+Veri alana veya gönderiline kadar bloklar.
+
+Default case eklendiyse doğrudan oraya düşer (advanced pattern)
+
+	select {
+	case v1 := <-chan1:
+	case chan3 <- v3:
+	default:
+	}
+
+* Select (devam)
+
+.play -edit code/select/select.go /START OMIT/,/END OMIT/
+
 * Araçlar
 * Go tool
 * Godoc
