@@ -8,7 +8,7 @@ func main() {
 	b := "Istanbul" // string
 	c := -13        // int (int8, int16, int32, int64)
 	d := 2015       // uint (uint8, uint16, uint32, uint64)
-	e := 3.14       // float32 (float54)
+	e := 3.14       // float32 (float64)
 
 	fmt.Printf("%v %v %v %v %v\n", a, b, c, d, e)
 

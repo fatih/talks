@@ -15,6 +15,7 @@ func fibonacci(n int, c chan int) {
 	x, y := 0, 1
 	for i := 0; i < n; i++ {
 		c <- x
+		// slow producer
 		// time.Sleep(time.Millisecond * 300)
 		x, y = y, x+y
 	}
@@ -29,6 +30,7 @@ func main() {
 	go fibonacci(bufSize, c)
 
 	for i := range c {
+		// slow consumer
 		// time.Sleep(time.Millisecond * 300)
 		fmt.Println(i)
 	}
