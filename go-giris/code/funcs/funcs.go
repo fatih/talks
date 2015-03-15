@@ -4,11 +4,11 @@ import "fmt"
 
 // START OMIT
 
-var a = func() {
+var globalVar = func() {
 	fmt.Println("Function assigned to a variable")
 }
 
-func b(x func()) {
+func unexported(x func()) {
 	fmt.Println("Private (unexported) function")
 	x()
 }
@@ -18,14 +18,14 @@ func Exported() {
 }
 
 func main() {
-	a()
-	b(a)
+	globalVar()
+	unexported(globalVar)
 	Exported()
 
-	a = func() {
+	globalVar = func() {
 		fmt.Println("Override function variable")
 	}
-	a()
+	globalVar()
 }
 
 // END OMIT
