@@ -206,11 +206,13 @@ defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
 
 .play code/defer/defer.go
 
-* Defer 2 
+* Defer (devam)
 
 .play -edit code/defer2/defer2.go /START OMIT/,/END OMIT/
 
-* Defer 2 (çözüm)
+* Defer (devam)
+
+Çözum:
 
 	func deadlock(a int) {
 		mu.Lock()
@@ -261,7 +263,7 @@ tanımlayabilirsiniz.
 
 Metodlar Go'da çok önemli bir yere sahip.
 
-* Methods 2
+* Methods (devam)
 
 Metodları tanımladığınız her türe tanımlayabilirsiniz.
 
@@ -313,7 +315,69 @@ Point ve MyInt türleri *Add* metodunu tanımlıyor
 		return int(m) + a
 	}
 
+Interface de bir tür olduğundan bir fonksiyona paslayabiliriz:
+
 .play code/interfaces/interfaces.go /START OMIT/,/END OMIT/
+
+* Interfaces (Standart kitaplıktan örnekler)
+
+Bir türün ayıklanabilir kılmak
+
+	type Sorter interface {
+		Len() int
+		Less(i, j int) bool
+		Swap(i, j int)
+	}
+
+fmt.Printf() cıktısını kontrol etmek
+
+	type Stringer interface {
+		String() string
+	}
+
+Herhangi bir türe HTTP serve desteği vermek
+
+	type Handler interface {
+		ServeHTTP(ResponseWriter, *Request)
+	}
+
+* Interfaces (Stringer örneği)
+
+Point ve MyInt türlerine *Stringer* desteği verelim
+
+	func (p Point) String() string {
+		return fmt.Sprintf("X: %d Y: %d Sum: %d", p.X, p.Y, p.Add(0))
+	}
+
+	func (m MyInt) String() string {
+		return "*** " + strconv.Itoa(int(m)) + " ***"
+	}
+
+
+.play code/interfaces2/interfaces2.go /START OMIT/,/END OMIT/
+
+* Interfaces (Çevreleme)
+
+Girdi ve çıktısi interface olan fonksiyonlar hem bağımsız hem de ölçeklenebilir
+bir yazılım yapmanıza olanak sağlar:
+
+	func LoggingReader(r io.Reader) io.Reader
+	func LimitingReader(r io.Reader, n int64) io.Reader
+	func ErrorInjector(r io.Reader) io.Reader
+
+* Interfaces (Çevreleme örnek)
+
+Color paketi (https://github.com/fatih/color) sadece Linux/Mac OS X benzeri
+işletim sistemlerinde calışıyordu (ANSI desteği olanlarda)
+
+Renk çıktısını kontrol eden değişken bir Interface türu (io.Writer). Mevcut
+standard output'u kullaniyor.
+
+	var Output io.Writer = os.Stdout
+
+Windows ANSI desteklemiyor. Çözum:
+
+.image color.png
 
 
 * Hata yönetimi (errors)
