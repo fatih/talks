@@ -143,7 +143,7 @@ Uzaktaki bir sunucudan paket dahil edebilirsiniz
 - import "github.com/streadway/amqp"
 - import "golang.org/x/net/websocket"
 
-* Paketlerin kullanımı 2 
+* Paketlerin kullanımı (devam)
 
 	package main
 
@@ -171,15 +171,50 @@ Uzaktaki bir sunucudan paket dahil edebilirsiniz
 
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler
 
+Tanımlanmayan değişkenler, öntanımlı olarak o türün sıfır değerini alır.
+
+	var a int
+	fmt.Println(a) // a: 0
+
+Fonksiyon girdilerini türe göre gruplayabilirsiniz.
+
+	func foo(x, y, z int) int {}
+	func bar(a int, b, c string) int {}
+
+Birden fazla sonuç dönebiliriz 
+
+	func foo() (int, bool) {}
+	func bar() (string, string, float64) {}
+
+
+* Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler (örnek)
+
 .play code/vars/vars.go /START OMIT/,/END OMIT/
 
-* Zero Values
+* Hata yönetimi (errors)
 
-Her degişken öntanımli olarak o türün sıfır değerini alır.
+Çoklu şonuç dönmek güzel, neden sonuçlardan biri *hata* türünde olmuyor?
 
-Basit ama önemli bir özellik.
+Exception veya assert yok. C-style hata yönetimi
 
-.play code/zero/zero.go /START OMIT/,/END OMIT/
+Hataları her zaman yönetmeniz gerekiyor, kaçıs yok.
+
+C'de:
+
+	file := os.Open("/path/file.txt")
+	if file == -1 {
+		return -1
+	}
+
+Go'da 
+
+	file, err := os.Open("/path/file.txt")
+	if err != nil {
+		return 0, err
+	}
+
+	// file ile ilgili işlemler ...
+
 
 
 * Akış kontrolleri
@@ -379,8 +414,6 @@ Windows ANSI desteklemiyor. Çözum:
 
 .image color.png
 
-
-* Hata yönetimi (errors)
 * Goroutine
 * Channels
 * Range
