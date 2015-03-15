@@ -276,14 +276,6 @@ Fonksiyonlar da bir türdür
 
 Anonymous fonksiyonlar
 
-	fn := func(text string) {
-		fmt.Println(text)
-	}
-
-	fn("golang")
-
-	foo(fn, 123)
-
 
 * Fonksiyonlar (devam)
 
@@ -463,7 +455,66 @@ Main fonksiyon'u ilk *goroutine* olarak başlangıç adımını yapar.
 
 
 * Channels
+
+Don't communicate by sharing memory; share memory by communicating. 
+
+Kanal oluşturma:
+
+	ch := make(chan int)
+
+Veri göndermek:
+
+	ch <- v
+
+Veri almak:
+
+	v := <-ch
+
+
+* Channels (devam)
+
+
+Iki goroutine fonksiyonu arasindaki iletişim nasil olur ?
+
+- Ortak bir veri üzerinden (bellek, sharing state)
+- Ortak bir iletişim kanalından
+
+Bellek üzerinden veri paylaşım ölçeklenebilir değil ve sorunlara yol açıyor.
+
+Veriyi iletişim yollarından paylaşılmalı
+
+Kanallar (channels) iki eşzamanlı fonksiyonun kendi aralarında etkileşimi senkronize etmeye yaran bir veri mekanizmasıdır.
+
+* Channels (devam)
+
+.play code/channels/channels.go /START OMIT/,/END OMIT/
+
+Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
+bloklanır.
+
+Tamponlanmış kanallar ile bloklamaya ortadan kaldirabiliriz
+
+	ch := make(chan int, 100)
+
 * Range
+
+Range keywordu bir çok veri yapısı için kullanıllır
+
+- String (index, rune)
+- Array (index, value)
+- Slice (index, value)
+- Map (key, value)
+
+	for k, v := range ch { }
+
+- Channel (element)
+
+	for e := range ch { }
+
+* Range (devam)
+
+.play -edit code/range/range.go /START OMIT/,/END OMIT/
+
 * Select
 
 * Araçlar
