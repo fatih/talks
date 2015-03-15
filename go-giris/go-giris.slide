@@ -626,9 +626,64 @@ Tonlarca saat kazandırır insanlara.
 
 
 * Test (yazmak)
+
+`go` araci `testing` paketi hafif bir test framework'u sunuyor
+
+.code code/test/string_test.go /func TestIndex/,/^}/
+
 * Test (çalıstırmak)
+
+Go aracı ile testleri çalıştırıyorsunuz
+
+	$ go test
+	PASS
+
+	$ go test -v
+	=== RUN TestIndex
+	--- PASS: TestIndex (0.00 seconds)
+	PASS
+
+	$ go test -run "AnotherIndex"
+	=== RUN TestAnotherIndex
+	--- PASS: TestAnotherIndex (0.00 seconds)
+	PASS
+
+Mevcut tüm projeler için çalıştırmak için:
+
+	$ go test github.com/koding/...
+
 * Test (ölçmek)
+
+`testing` paketi hiz ve performans ölçümünü yapmanızı da sağlıyor
+	
+Örnek bir benchmark fonksiyonu:
+
+.code code/test/string_test.go /func BenchmarkIndex/,/^}/
+
+Benchmark paketi `b.N` değerini fonksiyon düzgün çıktı verene kadar yükseltiyor.
+
+	$ go test -test.bench=Index
+	PASS
+	BenchmarkIndex	50000000	        37.3 ns/op
+
 * Test (örnekler)
+
+`testing` paketi test edilebilen örnekleri de destekliyor.
+
+.code code/test/string_test.go /func ExampleIndex/,/^}/
+
+Örnekler mevcut testler gibi derlenip çalışıyor:
+
+	$ go test -v
+	=== RUN: ExampleIndex
+	--- PASS: ExampleIndex (0.00 seconds)
+	PASS
+
+
+Eklediğiniz örnekler `godoc` da demo olarak da gözükuyor:
+
+.link http://godoc.org/github.com/fatih/structs#pkg-examples
+
 
 * Editör desteği ve uyumluluğu
 
@@ -656,7 +711,7 @@ Orta ve ileri seviye örnekler, ipucuları
 
 * Go camiası (go-nuts, irc, go-türkiye ...)
 
-- Türkçe mail Listesi: https://groups.google.com/forum/#!forum/golang-tr
+- Türkçe mail listesi: https://groups.google.com/forum/#!forum/golang-tr
 - Ingilizce mail listesi: https://groups.google.com/forum/#!forum/golang-nuts
 - Freenode'de *#go-nuts*
 - Twitter'de *#golang* hash tagi kullanılıyor (#go değil!)
