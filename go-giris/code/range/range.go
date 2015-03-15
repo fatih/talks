@@ -1,6 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
+
+// placeholder so we have the time package imported, so it doesn't break
+// when we uncomment the time.Sleep statement inside the fibonacci
+// function
+var b = time.Second
 
 // START OMIT
 func fibonacci(n int, c chan int) {
@@ -21,6 +29,7 @@ func main() {
 	go fibonacci(bufSize, c)
 
 	for i := range c {
+		// time.Sleep(time.Millisecond * 300)
 		fmt.Println(i)
 	}
 }

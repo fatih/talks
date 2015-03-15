@@ -498,6 +498,8 @@ Tamponlanmış kanallar ile bloklamaya ortadan kaldirabiliriz
 
 * Range
 
+Verinin üzerinde dolaşmak (iteration) için gerekli
+
 Range keywordu bir çok veri yapısı için kullanıllır
 
 - String (index, rune)
