@@ -269,6 +269,18 @@ Daha iyi:
 		}
 	}
 
+* Fonksiyonlar
+
+First class functions
+
+Fonksiyonlar da bir türdür
+
+Anonymous fonksiyonlar
+
+* Fonksiyonlar (devam)
+
+Runnable bir örnek ekle
+
 * Structs
 
 Birden fazla veri ve türü organize etmeye yarar. 
@@ -415,6 +427,24 @@ Windows ANSI desteklemiyor. Çözum:
 .image color.png
 
 * Goroutine
+
+Goroutine eş zamanlı olarak başka fonksiyonlar ile çalışabilen fonksiyonlara
+denilir.
+
+Go'da her fonksiyon başka bir goroutine tarafından çağırılır ve çalıştırılır.
+
+Main fonksiyon'u ilk *goroutine* olarak başlangıç adımını yapar.
+
+*go* kelimesi ile yeni bir goroutine başlatılır
+
+	go f(x, y, z)
+
+* Goroutine (devam)
+
+Öntanımlı olarak her fonksiyon çağrı **blocking*
+
+.play -edit code/goroutine/goroutine.go /START OMIT/,/END OMIT/
+
 * Channels
 * Range
 * Select
