@@ -1,22 +1,19 @@
 package main
 
-import (
-	"fmt"
-	"math"
-)
+import "fmt"
 
 // START OMIT
-type Vertex struct {
-	X, Y float64
+type Point struct {
+	X, Y int
 }
 
-func (v Vertex) Abs() float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+func (p Point) Add(a int) int {
+	return p.X + p.Y + a
 }
 
 func main() {
-	v := Vertex{3, 4}
-	fmt.Println(v.Abs())
+	p := Point{3, 4}
+	fmt.Println(p.Add(5))
 }
 
 // END OMIT

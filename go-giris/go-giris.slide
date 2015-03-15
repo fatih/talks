@@ -282,7 +282,40 @@ Metodları tanımladığınız her türe tanımlayabilirsiniz.
 		fmt.Println(res) // res: 9
 	}
 
-* Interfaces
+* Interfaces (Arayüz)
+
+Interface tanımlamasi bir veya birden fazla *metod* ile tanımlanır:
+
+	type Adder interface {
+		Add(int) int
+	}
+
+Interface de, tıpkı int, string, struct gibi bir türdür.
+
+	var a Adder 
+
+Bir tür interface ile tanımlanan metodları tanımlıyorsa o interface'i örtülü
+(belirtmeden) gerçekleştirir
+
+	p := Point{3, 4}
+	m := MyInt(3)
+
+
+* Interfaces (Örnek)
+
+Point ve MyInt türleri *Add* metodunu tanımlıyor
+
+	func (p Point) Add(a int) int {
+		return p.X + p.Y + a
+	}
+
+	func (m MyInt) Add(a int) int {
+		return int(m) + a
+	}
+
+.play code/interfaces/interfaces.go /START OMIT/,/END OMIT/
+
+
 * Hata yönetimi (errors)
 * Goroutine
 * Channels
