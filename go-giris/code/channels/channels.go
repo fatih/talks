@@ -5,7 +5,7 @@ import "fmt"
 // START OMIT
 
 func main() {
-	messages := make(chan string, 1)
+	messages := make(chan string)
 
 	go func() {
 		messages <- "ping"

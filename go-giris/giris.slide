@@ -11,7 +11,7 @@ fatih@arslan.io
 
 * Go nedir?
 
-- Ken Thompson, Rob Pike ve Robert Griesiemer tarafindan ilk adımları atıldı (2007)
+- Ken Thompson, Rob Pike ve Robert Griesiemer tarafından ilk adımları atıldı (2007)
 - 10 Kasım 2009 yılında tanıtıldı, 28 Mart 2012'da Go 1.0 yayımlandı
 - Genç ve yeni bir dil
 - Açık Kaynak
@@ -20,7 +20,7 @@ fatih@arslan.io
 
 * Neden Go? (Sorunlar)
 
-Büyük ölçekteki yazılımlari geliştirmenin zorluğu üzerine çıkmıştir. Nedir bu
+Büyük ölçekteki yazılımları geliştirmenin zorluğu üzerine çıkmıştır. Nedir bu
 sorunlar?
 
 - Yavaş inşa sistemleri (build systems)
@@ -35,7 +35,7 @@ sorunlar?
 
 * Neden Go? (Sorunlar)
 
-- Insanlarin bir dilin özelliklerin belirli alt kümelerini kullanması
+- Insanların bir dilin özelliklerin belirli alt kümelerini kullanması
 
 .image features.jpg
 
@@ -48,18 +48,18 @@ sorunlar?
 - Google'deki yavaş ve hantal yazılım geliştirme'yi ortadan kaldırmak
 - Büyük ölçekteki yazılımları kontrol altında tutmak
 
-* Neden Go? (Çözumler)
+* Neden Go? (Çözümler)
 
-- Büyük bir Go programini saniyeler içinde derleyebiliyorsunuz
+- Büyük bir Go programını saniyeler içinde derleyebiliyorsunuz
 - Sözdizimi (syntax) anlaşılır
 - Temelleri basitlik üzerine kurulan bir düşünce yapısı
-- Bağımlılık çözümu kolay ve basit (C tipi include dosyalari olmaksızın)
+- Bağımlılık kullanıcıya bırakılmıştır
 - Dahili eşzaman  yazılım temelleri (channels, goroutines, select)
 - Static typed ama dynamic typed gibi hissediliyor
 - Test, belgelendirme, bağımlılık yönetimi, vs.. ekosistemi
 
 
-* Go'yi kimler kullaniyor?
+* Go'yu kimler kullanıyor?
 
 - Google
 - Apple
@@ -72,7 +72,7 @@ sorunlar?
 - Dropbox
 - ve daha fazlası: https://github.com/golang/go/wiki/GoUsers
 
-* Paketler ve Isimlendirme
+* Paketler ve İsimlendirme
 
 * Paketler
 
@@ -93,16 +93,16 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
 Main paketi özeldir. 
 
-Bir Go uygulamasi main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
-kendi başına calısmaz
+Bir Go uygulaması main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
+kendi başına çalışmaz.
 
 .play code/main.go
 
 
-* Isimlendirme
+* İsimlendirme
 
 - Baş harfi *büyük* karakter ile başlayan tanımlamaları kullanabiliyorsunuz (public).  
-- Bas harfi *küçük* karakter ile başlayan tanımlamaları dışarıdan erışemezsiniz (private).
+- Baş harfi *küçük* karakter ile başlayan tanımlamaları dışarıdan erişemezsiniz (private).
 
 Örnek: 
 
@@ -125,6 +125,7 @@ kendi başına calısmaz
 * Paketlerin kullanımı
 
 Main dışındaki tüm paketler başkaları tarafından kullanılmalı
+Paketler kendi başkaları taraf
 
 - package json
 
@@ -192,11 +193,11 @@ Birden fazla sonuç dönebiliriz
 
 * Hata yönetimi (errors)
 
-Çoklu şonuç dönmek güzel, neden sonuçlardan biri *hata* türünde olmuyor?
+Çoklu sonuç dönmek güzel, neden sonuçlardan biri *hata* türünde olmuyor?
 
 Exception veya assert yok. C-style hata yönetimi
 
-Hataları her zaman yönetmeniz gerekiyor, kaçıs yok.
+Hataları her zaman yönetmeniz gerekiyor, kaçış yok.
 
 C'de:
 
@@ -246,7 +247,7 @@ defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
 
 * Defer (devam)
 
-Çözum:
+Çözüm:
 
 	func deadlock(a int) {
 		mu.Lock()
@@ -270,11 +271,11 @@ Daha iyi:
 
 * Fonksiyonlar
 
-First class functions
+Birinci sınıf functions
 
 Fonksiyonlar da bir türdür
 
-Anonymous fonksiyonlar
+Anonim fonksiyonlar
 
 
 * Fonksiyonlar (devam)
@@ -335,6 +336,8 @@ Metodları tanımladığınız her türe tanımlayabilirsiniz.
 
 Interface tanımlamasi bir veya birden fazla *metod* ile tanımlanır:
 
+Interface birden fazla methodu/özelliklerini sağlayan bir tür.
+
 	type Adder interface {
 		Add(int) int
 	}
@@ -343,8 +346,8 @@ Interface de, tıpkı int, string, struct gibi bir türdür.
 
 	var a Adder 
 
-Bir tür interface ile tanımlanan metodları tanımlıyorsa o interface'i örtülü
-(belirtmeden) gerçekleştirir
+Bir tür, interface ile tanımlanan metodları tanımlıyorsa (implement) o
+interface'i örtülü (implicit) gerçekleştirir
 
 	p := Point{3, 4}
 	m := MyInt(3)
@@ -368,7 +371,7 @@ Interface de bir tür olduğundan bir fonksiyona paslayabiliriz:
 
 * Interfaces (Standart kitaplıktan örnekler)
 
-Bir türün ayıklanabilir kılmak
+Bir türü siralayabilmek için:
 
 	type Sorter interface {
 		Len() int
@@ -376,7 +379,7 @@ Bir türün ayıklanabilir kılmak
 		Swap(i, j int)
 	}
 
-fmt.Printf() cıktısını kontrol etmek
+fmt.Printf() cıktısını değiştirmek için (Python'daki _str_, _repr_ gibi) 
 
 	type Stringer interface {
 		String() string
@@ -405,8 +408,8 @@ Point ve MyInt türlerine *Stringer* desteği verelim
 
 * Interfaces (Çevreleme)
 
-Girdi ve çıktısi interface olan fonksiyonlar hem bağımsız hem de ölçeklenebilir
-bir yazılım yapmanıza olanak sağlar:
+Girdi ve çıktısı interface olan fonksiyonlar hem bağımsız (orthogonal) hem de
+ölçeklenebilir bir yazılım yazmanıza olanak sağlar:
 
 	func LoggingReader(r io.Reader) io.Reader
 	func LimitingReader(r io.Reader, n int64) io.Reader
@@ -415,14 +418,14 @@ bir yazılım yapmanıza olanak sağlar:
 * Interfaces (Çevreleme örnek)
 
 Color paketi (https://github.com/fatih/color) sadece Linux/Mac OS X benzeri
-işletim sistemlerinde calışıyordu (ANSI desteği olanlarda)
+işletim sistemlerinde çalışıyordu (ANSI desteği olanlarda)
 
-Renk çıktısını kontrol eden değişken bir Interface türu (io.Writer). Mevcut
-standard output'u kullaniyor.
+Renk çıktısını kontrol eden değişken bir Interface türü (io.Writer). Mevcut
+standard çiktısı kullanıyor.
 
 	var Output io.Writer = os.Stdout
 
-Windows ANSI desteklemiyor. Çözum:
+Windows ANSI desteklemiyor. Çözüm:
 
 .image color.png
 
@@ -434,12 +437,8 @@ Windows ANSI desteklemiyor. Çözum:
 
 * Goroutine
 
-Goroutine eş zamanlı olarak başka fonksiyonlar ile çalışabilen fonksiyonlara
-denilir.
-
-Go'da her fonksiyon başka bir goroutine tarafından çağırılır ve çalıştırılır.
-
-Main fonksiyon'u ilk *goroutine* olarak başlangıç adımını yapar.
+Goroutine eş zamanlı olarak aynı adres uzayında bağımsız olarak çalışabilen
+fonksiyonlara denir.
 
 *go* kelimesi ile yeni bir goroutine başlatılır
 
@@ -456,7 +455,7 @@ Main fonksiyon'u ilk *goroutine* olarak başlangıç adımını yapar.
 
 * Channels
 
-Don't communicate by sharing memory; share memory by communicating. 
+- Don't communicate by sharing memory; share memory by communicating.
 
 Kanal oluşturma:
 
@@ -473,17 +472,17 @@ Veri almak:
 
 * Channels (devam)
 
-
-Iki goroutine fonksiyonu arasindaki iletişim nasil olur ?
+İki goroutine fonksiyonu arasındaki iletişim nasıl olur ?
 
 - Ortak bir veri üzerinden (bellek, sharing state)
 - Ortak bir iletişim kanalından
 
 Bellek üzerinden veri paylaşım ölçeklenebilir değil ve sorunlara yol açıyor.
 
-Veriyi iletişim yollarından paylaşılmalı
+Veri iletişim yollarından paylaşılmalı.
 
-Kanallar (channels) iki eşzamanlı fonksiyonun kendi aralarında etkileşimi senkronize etmeye yaran bir veri mekanizmasıdır.
+Kanallar (channels) iki eşzamanlı fonksiyonun kendi aralarında etkileşimi
+senkronize etmeye yarayan bir veri yapısıdır.
 
 * Channels (devam)
 
@@ -492,7 +491,7 @@ Kanallar (channels) iki eşzamanlı fonksiyonun kendi aralarında etkileşimi se
 Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
 bloklanır.
 
-Tamponlanmış kanallar ile bloklamaya ortadan kaldirabiliriz
+Tamponlanmış kanallar ile bloklamaya ortadan kaldirabiliriz.
 
 	ch := make(chan int, 100)
 
@@ -527,8 +526,8 @@ Veri alana veya gönderiline kadar bloklar.
 Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 
 	select {
-	case v1 := <-chan1:
-	case chan3 <- v3:
+	case data := <-connection:
+	case <-time.After(time.Second*30):
 	default:
 	}
 
@@ -544,7 +543,7 @@ Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 
 * Go tool (paket derleme)
 
-Go kodunu inşa etmek ve kurmak icin `go` aracı kullanmak gerekiyor
+Go kodunu inşa etmek ve kurmak için `go` aracı kullanmak gerekiyor
 
 Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştiriyor:
 
@@ -554,7 +553,7 @@ Mevcut klasördeki paketi derleyip kurmak için:
 
 	$ go install
 
-Go aracı diğer tum Go araçları için aynı zamanda bir proxy görevi yapiyor. Yani
+Go aracı diğer tüm Go araçları için aynı zamanda bir proxy görevi yapıyor. Yani
 onun sayesinde diğer gerekli araçları çağırabilirsiniz (örneğin: go tool
 pprof).
 
@@ -566,14 +565,14 @@ Import path'leri URL şeklinde olabilir:
 	import "github.com/fatih/structs"
 	import "golang.org/x/net/websocket"
 
-Indirmek için `go` aracını kullanabiliriz:
+İndirmek için `go` aracını kullanabiliriz:
 
 	$ go get github.com/fatih/structs
 
 "go get" sırayla şunları sizin için yapıyor:
 
 - Git reposunden GOPATH/src/github.com/fatih/structs olarak indiriyor
-- Tum paketi derliyor ve kuruyor
+- Tüm paketi derliyor ve kuruyor
 - Eger "-u" parametresini verirseniz paketi güncelliyor
 
 * Godoc
@@ -614,24 +613,24 @@ Doğrudan terminal'den kullanabilirsiniz:
 
 Go kodunu güzelleştiriyor.
 
-Tum Go core kodu gofmt'lendirildi. Gofmt'siz kod içeriye girmiyor.
+Tüm Go core kodu gofmt'lendirildi. Gofmt'siz kod içeriye girmiyor.
 
-Go kodu nasil yazılmalı? sorusunu ortadan kaldırıyor.
+Go kodu nasıl yazılmalı? sorusunu ortadan kaldırıyor.
 
-Okunuşu iyileştiriyor. Yazmayi iyileştiriyor. 
+Okunuşu iyileştiriyor. Yazmayı iyileştiriyor. 
 
-Tonlarca saat kazandırır insanlara.
+Stil tartışmalara son veriyor
 
 .image gofmt.png _ 900
 
 
 * Test (yazmak)
 
-`go` araci `testing` paketi hafif bir test framework'u sunuyor
+`go` aracı ve `testing` paketi hafif bir test framework'u sunuyor
 
 .code code/test/string_test.go /func TestIndex/,/^}/
 
-* Test (çalıstırmak)
+* Test (çalıştırmak)
 
 Go aracı ile testleri çalıştırıyorsunuz
 
@@ -654,7 +653,7 @@ Mevcut tüm projeler için çalıştırmak için:
 
 * Test (ölçmek)
 
-`testing` paketi hiz ve performans ölçümünü yapmanızı da sağlıyor
+`testing` paketi hız ve performans ölçümünü yapmanızı da sağlıyor.
 	
 Örnek bir benchmark fonksiyonu:
 
@@ -716,11 +715,10 @@ Orta ve ileri seviye örnekler, ipucuları
 - Freenode'de *#go-nuts*
 - Twitter'de *#golang* hash tagi kullanılıyor (#go değil!)
 
-* Go ne degildir ve ne icin kullanilmaz
+* Go ne değildir ve ne için kullanılmaz
 
 - Araştırma'ya yönelik bir akademik Programlama dili değil (onlar kendini biliyor :))
-- Nesne Yönelimli programlama dili değildir (Object Oriented), ama bir çok dilden bazı özellikleri almıştır.
-- Gömullü sistemler için uygun değil (henüz)
+- Gömülü sistemler için uygun değil (henüz)
 - Betik dili değil (Python veya Ruby gibi)
 
 * Go nasıl kurulur?
