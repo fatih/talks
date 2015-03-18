@@ -20,28 +20,44 @@ fatih@arslan.io
 
 * Neden Go? (Sorunlar)
 
-Büyük ölçekteki yazılımları geliştirmenin zorluğu üzerine çıkmıştır. Nedir bu
-sorunlar?
+Büyük ölçekteki yazılımları (Google'deki) geliştirmenin zorluğu üzerine çıkmıştır. 
+
+Nedir bu sorunlar?
+
+* Neden Go? (Sorunlar)
 
 - Yavaş inşa sistemleri (build systems)
 
 .image compiling.png
 
-* Neden Go? (Sorunlar)
+Koding'deki 200K satır kod 11 saniye'de derleniyor (Macbook Pro)
 
-- Kontrol altına alınamayan bağımlılıklar
+* Neden Go?
+
+- Kontrol altına alınamayan bağımlılıklar (C++ sorunları)
 
 .image dependencies.jpg
 
-* Neden Go? (Sorunlar)
+Bağımlılıkları yönetmek kişiye bırakılıyor, merkezı paket yönetim yok.
+
+* Neden Go?
 
 - Insanların bir dilin özelliklerin belirli alt kümelerini kullanması
 
 .image features.jpg
 
-* Neden Go? (Sorunlar)
+Go'da bir işi yapmanın genellikle sadece bir yolu vardır.
 
-- Kod'u anlamak ve okumak zor
+* Neden Go?
+
+Karışı şöz dizimi kuralları
+
+.image syntax.jpg
+
+Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittikçe artıyor)
+
+* Neden Go?
+
 - Güncelleme maliyeti
 - Makineler hızlı, ama yazılım geliştirme hala yavaş
 - Eşzamanlı (concurrent) program geliştırme temelleri bir çok dilde yeterince gelişmemiş
@@ -58,6 +74,11 @@ sorunlar?
 - Static typed ama dynamic typed gibi hissediliyor
 - Test, belgelendirme, bağımlılık yönetimi, vs.. ekosistemi
 
+* Go ne değildir ve ne için kullanılmaz
+
+- Araştırma'ya yönelik bir akademik Programlama dili değil (onlar kendini biliyor :))
+- Gömülü sistemler için uygun değil (henüz)
+- Betik dili değil (Python veya Ruby gibi)
 
 * Go'yu kimler kullanıyor?
 
@@ -715,11 +736,6 @@ Orta ve ileri seviye örnekler, ipucuları
 - Freenode'de *#go-nuts*
 - Twitter'de *#golang* hash tagi kullanılıyor (#go değil!)
 
-* Go ne değildir ve ne için kullanılmaz
-
-- Araştırma'ya yönelik bir akademik Programlama dili değil (onlar kendini biliyor :))
-- Gömülü sistemler için uygun değil (henüz)
-- Betik dili değil (Python veya Ruby gibi)
 
 * Go nasıl kurulur?
 
