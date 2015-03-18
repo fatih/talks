@@ -58,21 +58,13 @@ Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittik�
 
 * Neden Go?
 
-- Güncelleme maliyeti
-- Makineler hızlı, ama yazılım geliştirme hala yavaş
-- Eşzamanlı (concurrent) program geliştırme temelleri bir çok dilde yeterince gelişmemiş
-- Google'deki yavaş ve hantal yazılım geliştirme'yi ortadan kaldırmak
-- Büyük ölçekteki yazılımları kontrol altında tutmak
-
-* Neden Go? (Çözümler)
-
-- Büyük bir Go programını saniyeler içinde derleyebiliyorsunuz
-- Sözdizimi (syntax) anlaşılır
-- Temelleri basitlik üzerine kurulan bir düşünce yapısı
-- Bağımlılık kullanıcıya bırakılmıştır
-- Dahili eşzaman  yazılım temelleri (channels, goroutines, select)
-- Static typed ama dynamic typed gibi hissediliyor
-- Test, belgelendirme, bağımlılık yönetimi, vs.. ekosistemi
+- Açık kaynak
+- Basit
+- Güncelleme güvenliği
+- Eşzamanlı (concurrency) 
+- Garbage collection
+- Static Typed
+- Dahili çözümler
 
 * Go ne değildir ve ne için kullanılmaz
 
