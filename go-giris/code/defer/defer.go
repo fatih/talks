@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	defer fmt.Println("world")
+	defer fmt.Println("ÖYG!")
+	defer fmt.Println("Dünya")
 
-	fmt.Println("hello")
+	fmt.Println("Merhaba")
 }

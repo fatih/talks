@@ -148,13 +148,6 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
 	func Multiply(x, y int) int { return x * y }
 
-
-* Go sözdizimi ve temel dil yapısı
-
-* Türler
-
-.play code/data/data.go /START OMIT/,/END OMIT/
-
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler (örnek)
 
 - Tanımlanmayan değişkenler, öntanımlı olarak o türün sıfır değerini alır.
@@ -166,7 +159,7 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
 Çoklu sonuç dönmek güzel, neden sonuçlardan biri *hata* türünde olmuyor?
 
-Exception veya assert yok. C-style hata yönetimi
+Exception veya assert yok. 
 
 Hataları her zaman yönetmeniz gerekiyor, kaçış yok.
 
@@ -185,332 +178,6 @@ Go'da
 	}
 
 	// file ile ilgili işlemler ...
-
-
-
-* Akış kontrolleri
-
-Basit akışlar:
-
-- if, else
-- for, break, continue
-- switch, case, default, fallthrough
-- return
-- goto
-
-Gelişmiş akışlar:
-
-- range
-- select
-- go
-- defer
-
-* Defer
-
-defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
-çalışmasını erteler.
-
-.play code/defer/defer.go
-
-* Defer (devam)
-
-.play -edit code/defer2/defer2.go /START OMIT/,/END OMIT/
-
-* Defer (devam)
-
-Çözüm:
-
-	func deadlock(a int) {
-		mu.Lock()
-		if 4 < a {
-			mu.Unlock()
-			return
-		}
-		mu.Unlock()
-	}
-
-Daha iyi:
-
-	func deadlock(a int) {
-		mu.Lock()
-		defer mu.Unlock()
-
-		if 4 < a {
-			return
-		}
-	}
-
-* Fonksiyonlar
-
-Birinci sınıf functions
-
-Fonksiyonlar da bir türdür
-
-Anonim fonksiyonlar
-
-
-* Fonksiyonlar (devam)
-
-.play code/funcs/funcs.go /START OMIT/,/END OMIT/
-
-* Structs
-
-Birden fazla veri ve türü organize etmeye yarar. 
-
-	type MyInt int	
-
-	type Vertex struct {
-		X int
-		Y MyInt
-		Z bool
-	}
-
-Kullanım:
-
-	func main() {
-		v := Vertex{1, 2}
-		v.X = 4
-		fmt.Println(v.X)
-	}
-
-* Methods
-
-Go'da Class yapısı bulunmaz. Ama metodlar ile bir *struct* türüne fonksiyonlar
-tanımlayabilirsiniz.
-
-.play code/methods/methods.go /START OMIT/,/END OMIT/
-
-Metodlar Go'da çok önemli bir yere sahip.
-
-* Methods (devam)
-
-Metodları tanımladığınız her türe tanımlayabilirsiniz.
-
-	package main
-
-	import "fmt"
-
-	type MyInt int
-
-	func (m MyInt) Add(a int) int {
-		return int(m) + a
-	}
-
-	func main() {
-		var y MyInt = 4
-		res := y.Add(5)
-
-		fmt.Println(res) // res: 9
-	}
-
-* Interfaces (Arayüz)
-
-Interface tanımlamasi bir veya birden fazla *metod* ile tanımlanır:
-
-Interface birden fazla methodu/özelliklerini sağlayan bir tür.
-
-	type Adder interface {
-		Add(int) int
-	}
-
-Interface de, tıpkı int, string, struct gibi bir türdür.
-
-	var a Adder 
-
-Bir tür, interface ile tanımlanan metodları tanımlıyorsa (implement) o
-interface'i örtülü (implicit) gerçekleştirir
-
-	p := Point{3, 4}
-	m := MyInt(3)
-
-
-* Interfaces (Örnek)
-
-Point ve MyInt türleri *Add* metodunu tanımlıyor
-
-	func (p Point) Add(a int) int {
-		return p.X + p.Y + a
-	}
-
-	func (m MyInt) Add(a int) int {
-		return int(m) + a
-	}
-
-Interface de bir tür olduğundan bir fonksiyona paslayabiliriz:
-
-.play code/interfaces/interfaces.go /START OMIT/,/END OMIT/
-
-* Interfaces (Standart kitaplıktan örnekler)
-
-Bir türü siralayabilmek için:
-
-	type Sorter interface {
-		Len() int
-		Less(i, j int) bool
-		Swap(i, j int)
-	}
-
-fmt.Printf() cıktısını değiştirmek için (Python'daki _str_, _repr_ gibi) 
-
-	type Stringer interface {
-		String() string
-	}
-
-Herhangi bir türe HTTP serve desteği vermek
-
-	type Handler interface {
-		ServeHTTP(ResponseWriter, *Request)
-	}
-
-* Interfaces (Stringer örneği)
-
-Point ve MyInt türlerine *Stringer* desteği verelim
-
-	func (p Point) String() string {
-		return fmt.Sprintf("X: %d Y: %d Sum: %d", p.X, p.Y, p.Add(0))
-	}
-
-	func (m MyInt) String() string {
-		return "*** " + strconv.Itoa(int(m)) + " ***"
-	}
-
-
-.play code/interfaces2/interfaces2.go /START OMIT/,/END OMIT/
-
-* Interfaces (Çevreleme)
-
-Girdi ve çıktısı interface olan fonksiyonlar hem bağımsız (orthogonal) hem de
-ölçeklenebilir bir yazılım yazmanıza olanak sağlar:
-
-	func LoggingReader(r io.Reader) io.Reader
-	func LimitingReader(r io.Reader, n int64) io.Reader
-	func ErrorInjector(r io.Reader) io.Reader
-
-* Interfaces (Çevreleme örnek)
-
-Color paketi (https://github.com/fatih/color) sadece Linux/Mac OS X benzeri
-işletim sistemlerinde çalışıyordu (ANSI desteği olanlarda)
-
-Renk çıktısını kontrol eden değişken bir Interface türü (io.Writer). Mevcut
-standard çiktısı kullanıyor.
-
-	var Output io.Writer = os.Stdout
-
-Windows ANSI desteklemiyor. Çözüm:
-
-.image color.png
-
-
-* Concurrency (Eşzamanlılık)
-
-* Concurrency
-.image concurrency.jpg
-
-
-* Eşzamanlılık nedir?
-
-Birbirinden bağımsız çalışmaların bir araya gelmesi, birleşmesi.
-
-Parallelik *değildir*
-
-Sadece bir işlemciniz varsa uygulamanız hala eşzamanlı çalışabilir, ama parallel çalışamaz.
-
-Daha fazla bilgi için: http://golang.org/s/concurrency-is-not-parallelism
-
-
-* Sıkıcı bir uygulama
-
-Go'nun eşzamanlı özelliklerini sıkıcı bir uygulama üzerinden anlatalım.
-
-.code code/concurrency/boring.go /START/,/STOP.*/
-
-* Biraz daha az sıkıcı
-
-Zamanlamayı biraz tahmin edilemeyecek şekilde yapalim (hala bir saniyenin altında)
-
-.code code/concurrency/lessboring.go /START/,/STOP/
-
-* Çalıştıralım
-
-Bu sıkıcı uygulama sonsuza kadar çalışıyor.
-
-.play code/concurrency/lessboring.go /^func.main/,$
-
-* Ihmal edelim
-
-go kelimesi normal fonksiyon gibi çalışır, sadece kendisini çağıranı bekletmez.
-
-Bir tane goroutine çalıştırıyor.
-
-Betik komutunun sonuna & konulmuş gibi düşünebilirsiniz.
-
-.play code/concurrency/goboring.go 1,/^}/
-
-* Biraz az ihmal edelim
-
-Main fonksiyonu bittiğinde uygulama kapanıyor, onunla birlikte sıkıcı uygulamamız da bitiyor.
-
-Biraz daha durabiliriz, böylelikle main fonksiyonu ve çalıştırdığımız goroutine çalıştığını görebiliriz.
-
-.play code/concurrency/waitgoboring.go /func.main/,/^}/
-
-* Goroutine
-
-Goroutine nedir? Goroutine, go kelimesi ile başlatılan ve bağımsız çalışan bir fonksiyondur.
-
-Çok ucuz, binlerce, hatta yüz binlerce çağırabiliriz.
-
-Thread *değildir*. (Işletim sistemi seviyesinde değil)
-
-Bir tane thread altında binlerce goroutine çalışabilir.
-
-Çok ucuz bir thread gibi düşünebilirsiniz.
-
-* İletişim
-
-Önceki sıkıcı uygulamamız sadece çıktı üretmişti.
-
-Halbuki iletişim için girdiye ihtiyac vardır.
-
-Goroutine'ler arasında iletişim nasıl olur?
-
-- Don't communicate by sharing memory; share memory by communicating.
-
-* Channels
-
-Kanallar iki goroutine'nin arasinda bir bağlantı sağlayarak, iletişim
-yapmalarını sağlarlar.
-
-
-Kanal oluşturma:
-
-	ch := make(chan int)
-
-Veri göndermek:
-
-	ch <- 5
-
-Veri almak (ok işareti verinin yönünü gösteriyor):
-
-	v = <-ch
-
-
-* Channels (devam)
-
-.play code/channels/channels.go /START OMIT/,/END OMIT/
-
-Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
-bloklanır.
-
-* Devamı var...
-
-Daha gelişmiş özelliklerimiz var. Bu konuşmanın dışında.
-
-- Buffered Channels
-
-- Range
-
-- Select
 
 * Araçlar
 
@@ -642,7 +309,6 @@ Benchmark paketi `b.N` değerini fonksiyon düzgün çıktı verene kadar yükse
 	PASS
 	BenchmarkIndex	50000000	        37.3 ns/op
 
-
 * Editör desteği ve uyumluluğu
 
 - *Vim:* https://github.com/fatih/vim-go
@@ -651,6 +317,295 @@ Benchmark paketi `b.N` değerini fonksiyon düzgün çıktı verene kadar yükse
 - *IntelliJ:* https://github.com/go-lang-plugin-org/go-lang-idea-plugin
 - *Eclipse:* https://github.com/GoClipse/goclipse
 - *LiteIDE:* https://github.com/visualfc/liteide
+
+
+* Go sözdizimi ve temel dil yapısı
+
+* Türler
+
+.play code/data/data.go /START OMIT/,/END OMIT/
+
+* Akış kontrolleri
+
+Basit akışlar:
+
+- if, else
+- for, break, continue
+- switch, case, default, fallthrough
+- return
+- goto
+
+Gelişmiş akışlar:
+
+- range
+- select
+- go
+- defer
+
+* Defer
+
+defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
+çalışmasını erteler.
+
+.play code/defer/defer.go
+
+* Fonksiyonlar
+
+Birinci sınıf functions
+
+Fonksiyonlar da bir türdür
+
+Anonim fonksiyonlar
+
+* Fonksiyonlar (devam)
+
+.play code/funcs/funcs.go /START OMIT/,/END OMIT/
+
+* Structs
+
+Birden fazla veri ve türü organize etmeye yarar. 
+
+	type Vertex struct {
+		X int
+		Y string
+		Z bool
+	}
+
+Veri'ye erişmek için `.` operatörünü kullanıyoruz:
+
+	v := Vertex{
+		X: 5,
+		Y: "Zeynep",
+		Z: true,
+	}
+
+	fmt.Println(v.X)
+
+* Methods
+
+Go'da Class yapısı bulunmaz. Ama metodlar ile bir *struct* türüne fonksiyonlar
+tanımlayabilirsiniz.
+
+.play code/methods/methods.go /START OMIT/,/END OMIT/
+
+Metodlar Go'da çok önemli bir yere sahip.
+
+* Methods (devam)
+
+Metodları tanımladığınız her türe tanımlayabilirsiniz.
+
+	package main
+
+	import "fmt"
+
+	type MyInt int
+
+	func (m MyInt) Add(a int) int {
+		return int(m) + a
+	}
+
+	func main() {
+		var y MyInt = 4
+		res := y.Add(5)
+
+		fmt.Println(res) // res: 9
+	}
+
+* Interfaces (Arayüz)
+
+Arayüzler bir türün davranışını belirlememizi sağlar.
+
+Eğer bir tür bir şeyi (method) yapıyorsa, onu başka bir yerde kullanabiliriz.
+
+Interface tanımlaması bir veya birden fazla *metod* ile tanımlanır:
+
+Interface birden fazla methodu/özelliklerini sağlayan bir tür.
+
+	type Adder interface {
+		Add(int) int
+	}
+
+Bir tür, interface ile tanımlanan metodları tanımlıyorsa (implement) o
+interface'i örtülü (implicit) gerçekleştirir
+
+
+* Interfaces (Örnek)
+
+Point ve MyInt türleri *Add* metodunu tanımlıyor
+
+	func (p Point) Add(a int) int {
+		return p.X + p.Y + a
+	}
+
+	func (m MyInt) Add(a int) int {
+		return int(m) + a
+	}
+
+Interface de bir tür olduğundan bir fonksiyona paslayabiliriz:
+
+.play code/interfaces/interfaces.go /START OMIT/,/END OMIT/
+
+* Interfaces (Standart kitaplıktan örnekler)
+
+Bir türü siralayabilmek için:
+
+	type Sorter interface {
+		Len() int
+		Less(i, j int) bool
+		Swap(i, j int)
+	}
+
+fmt.Printf() cıktısını değiştirmek için (Python'daki _str_, _repr_ gibi) 
+
+	type Stringer interface {
+		String() string
+	}
+
+Herhangi bir türe HTTP serve desteği vermek
+
+	type Handler interface {
+		ServeHTTP(ResponseWriter, *Request)
+	}
+
+* Interfaces (Stringer örneği)
+
+Point ve MyInt türlerine *Stringer* desteği verelim
+
+	func (p Point) String() string {
+		return fmt.Sprintf("X: %d Y: %d Sum: %d", p.X, p.Y, p.Add(0))
+	}
+
+	func (m MyInt) String() string {
+		return "*** " + strconv.Itoa(int(m)) + " ***"
+	}
+
+
+.play code/interfaces2/interfaces2.go /START OMIT/,/END OMIT/
+
+* Interfaces (Çevreleme örnek)
+
+Color paketi (https://github.com/fatih/color) sadece Linux/Mac OS X benzeri
+işletim sistemlerinde çalışıyordu (ANSI desteği olanlarda)
+
+Renk çıktısını kontrol eden değişken (*Output* adında) bir Interface türü
+(io.Writer). Mevcut standard çıktısı kullanıyor.
+
+Windows ANSI desteklemiyor. Çözüm:
+
+.image color.png
+
+
+* Concurrency (Eşzamanlılık)
+
+* Concurrency
+.image concurrency.jpg
+
+
+* Eşzamanlılık nedir?
+
+Birbirinden bağımsız çalışmaların bir araya gelmesi, birleşmesi.
+
+Parallelik *değildir*
+
+Sadece bir işlemciniz varsa uygulamanız hala eşzamanlı çalışabilir, ama parallel çalışamaz.
+
+Daha fazla bilgi için: http://golang.org/s/concurrency-is-not-parallelism
+
+
+* Sıkıcı bir uygulama
+
+Go'nun eşzamanlı özelliklerini sıkıcı bir uygulama üzerinden anlatalım.
+
+.code code/concurrency/boring.go /START/,/STOP.*/
+
+* Biraz daha az sıkıcı
+
+Zamanlamayı biraz tahmin edilemeyecek şekilde yapalim (hala bir saniyenin altında)
+
+.code code/concurrency/lessboring.go /START/,/STOP/
+
+* Çalıştıralım
+
+Bu sıkıcı uygulama sonsuza kadar çalışıyor.
+
+.play code/concurrency/lessboring.go /^func.main/,$
+
+* Arka plana atalım
+
+go kelimesi normal fonksiyon gibi çalışır, sadece kendisini çağıranı bekletmez.
+
+Bir tane goroutine çalıştırıyor.
+
+Betik komutunun sonuna & konulmuş gibi düşünebilirsiniz.
+
+.play code/concurrency/goboring.go 1,/^}/
+
+* Arka plana atalım (devamı)
+
+Main fonksiyonu bittiğinde uygulama kapanıyor, onunla birlikte sıkıcı uygulamamız da bitiyor.
+
+Biraz daha durabiliriz, böylelikle main fonksiyonu ve çalıştırdığımız goroutine çalıştığını görebiliriz.
+
+.play code/concurrency/waitgoboring.go /func.main/,/^}/
+
+* Goroutine
+
+Goroutine nedir? Goroutine, go kelimesi ile başlatılan ve bağımsız çalışan bir fonksiyondur.
+
+Çok ucuz, binlerce, hatta yüz binlerce çağırabiliriz.
+
+Thread *değildir*. (Işletim sistemi seviyesinde değil)
+
+Bir tane thread altında binlerce goroutine çalışabilir.
+
+Çok ucuz bir thread gibi düşünebilirsiniz.
+
+* İletişim
+
+Önceki sıkıcı uygulamamız sadece çıktı üretmişti.
+
+Halbuki iletişim için girdiye ihtiyac vardır.
+
+Goroutine'ler arasında iletişim nasıl olur?
+
+- Don't communicate by sharing memory; share memory by communicating.
+
+* Channels
+
+Kanallar iki goroutine'nin arasinda bir bağlantı sağlayarak, iletişim
+yapmalarını sağlarlar.
+
+
+Kanal oluşturma:
+
+	ch := make(chan int)
+
+Veri göndermek:
+
+	ch <- 5
+
+Veri almak (ok işareti verinin yönünü gösteriyor):
+
+	v = <-ch
+
+
+* Channels (devam)
+
+.play code/channels/channels.go /START OMIT/,/END OMIT/
+
+Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
+bloklanır.
+
+* Devamı var...
+
+Daha gelişmiş özelliklerimiz var. Bu konuşmanın dışında.
+
+- Buffered Channels
+
+- Range
+
+- Select
+
 
 * Nasıl Go öğrenmeye başlayabilirim?
 

@@ -4,7 +4,8 @@ import "fmt"
 
 // START OMIT
 type Point struct {
-	X, Y int
+	X int
+	Y int
 }
 
 func (p Point) Add(a int) int {
