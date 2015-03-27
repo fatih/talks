@@ -196,6 +196,7 @@ Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştiriyor:
 Mevcut klasördeki paketi derleyip kurmak için:
 
 	$ go install
+	$ go install github.com/jgrahamc/httpdiff
 
 Go aracı diğer tüm Go araçları için aynı zamanda bir proxy görevi yapıyor. Yani
 onun sayesinde diğer gerekli araçları çağırabilirsiniz (örneğin: go tool
@@ -267,7 +268,6 @@ Stil tartışmalara son veriyor
 
 .image gofmt.png _ 900
 
-
 * Test (yazmak)
 
 `go` aracı ve `testing` paketi hafif bir test framework'u sunuyor
@@ -294,20 +294,6 @@ Go aracı ile testleri çalıştırıyorsunuz
 Mevcut tüm projeler için çalıştırmak için:
 
 	$ go test github.com/koding/...
-
-* Test (ölçmek)
-
-`testing` paketi hız ve performans ölçümünü yapmanızı da sağlıyor.
-	
-Örnek bir benchmark fonksiyonu:
-
-.code code/test/string_test.go /func BenchmarkIndex/,/^}/
-
-Benchmark paketi `b.N` değerini fonksiyon düzgün çıktı verene kadar yükseltiyor.
-
-	$ go test -test.bench=Index
-	PASS
-	BenchmarkIndex	50000000	        37.3 ns/op
 
 * Editör desteği ve uyumluluğu
 
