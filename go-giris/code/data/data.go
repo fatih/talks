@@ -22,8 +22,9 @@ func main() {
 
 	fmt.Printf("%v %v %v %v\n", f, g, h, j)
 
-	_ = func(a int) string { return "first class functions" }
-	var _ chan bool
+	// ve daha nicesi ...
+	// functions
+	// channels
 }
 
 // END OMIT

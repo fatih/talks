@@ -11,10 +11,9 @@ fatih@arslan.io
 
 * Go nedir?
 
+- Açık Kaynak, genç ve yeni bir programlama dili
 - Ken Thompson, Rob Pike ve Robert Griesiemer tarafından ilk adımları atıldı (2007)
-- 10 Kasım 2009 yılında tanıtıldı, 28 Mart 2012'da Go 1.0 yayımlandı
-- Genç ve yeni bir dil
-- Açık Kaynak
+- 10 Kasım 2009 yılında tanıtıldı, 28 Mart 2012'da Go 1.0 yayınlandı
 - Basit ama güçlü
 .image gophers.jpg
 
@@ -30,7 +29,7 @@ Nedir bu sorunlar?
 
 .image compiling.png
 
-Koding'deki 200K satır kod 11 saniye'de derleniyor (Macbook Pro)
+Koding'deki 200K Go kodu 11 saniye'de derleniyor (Macbook Pro)
 
 * Neden Go?
 
@@ -38,7 +37,7 @@ Koding'deki 200K satır kod 11 saniye'de derleniyor (Macbook Pro)
 
 .image dependencies.jpg
 
-Bağımlılıkları yönetmek kişiye bırakılıyor, merkezı paket yönetim yok.
+Bağımlılıkları yönetmek kişiye bırakılıyor, merkezi paket yönetim yok.
 
 * Neden Go?
 
@@ -50,7 +49,7 @@ Go'da bir işi yapmanın genellikle sadece bir yolu vardır.
 
 * Neden Go?
 
-Karışı şöz dizimi kuralları
+Karışık şöz dizimi kuralları
 
 .image syntax.jpg
 
@@ -59,7 +58,7 @@ Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittik�
 * Neden Go? (devam)
 
 - Basit
-- Güncelleme güvenliği
+- Geriye dönük uyumluluk
 - Eşzamanlı (concurrency) 
 - Garbage collection
 - Static Typed
@@ -73,26 +72,35 @@ Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittik�
 
 * Go'yu kimler kullanıyor?
 
+- Koding
 - Google
 - Apple
 - Facebook
 - Twitter
-- Microsoft
+- Dropbox
 - Amazon
 - Github
 - Ubuntu (Canonical)
-- Dropbox
 - ve daha fazlası: https://github.com/golang/go/wiki/GoUsers
 
-* Paketler ve İsimlendirme
+* Go'ya giriş
+
+
+* İlk Go uygulamamız
+
+Bir Go uygulaması main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
+kendi başına çalışmaz.
+
+.play code/main.go
 
 * Paketler
+
 
 Her Go uygulaması paketlerden oluşur. 
 
 Paketler ne içerir ? 
 - Fonksiyon
-- Türler
+- Türler (types)
 - Değişkenler
 - Sabit türler (constants)
 
@@ -101,61 +109,7 @@ binlerce satır kod'dan da oluşabilir.
 
 Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
-* Main paketi
-
-Main paketi özeldir. 
-
-Bir Go uygulaması main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
-kendi başına çalışmaz.
-
-.play code/main.go
-
-
-* İsimlendirme
-
-- Baş harfi *büyük* karakter ile başlayan tanımlamaları kullanabiliyorsunuz (public).  
-- Baş harfi *küçük* karakter ile başlayan tanımlamaları dışarıdan erişemezsiniz (private).
-
-Örnek: 
-
-	var (
-		name    = "example"
-		region  = "asia"
-		Version = "0.0.1"
-	)
-
-	func add(x, y int) int      { return x + y }
-	func Multiply(x, y int) int { return x * y }
-
-	type Color struct{}
-
-	func (c *Color) Red(s string) {}
-	func (c *Color) prepend()     {}
-
-
-
 * Paketlerin kullanımı
-
-Main dışındaki tüm paketler başkaları tarafından kullanılmalı
-Paketler kendi başkaları taraf
-
-- package json
-
-Standard library paketlerine doğrudan erişiyorsunuz
-
-- import "fmt"
-- import "encoding/json"
-
-Dahil edilen paketin bir ismini değistirebilirsiniz
-
-- import googlelog "google/base/go/log"
-
-Uzaktaki bir sunucudan paket dahil edebilirsiniz
-
-- import "github.com/streadway/amqp"
-- import "golang.org/x/net/websocket"
-
-* Paketlerin kullanımı (devam)
 
 	package main
 
@@ -175,31 +129,36 @@ Uzaktaki bir sunucudan paket dahil edebilirsiniz
 		l.Info("App started")
 	}
 
+
+* İsimlendirme
+
+- Baş harfi *büyük* karakter ile başlayan tanımlamaları kullanabiliyorsunuz (public).  
+- Baş harfi *küçük* karakter ile başlayan tanımlamaları dışarıdan erişemezsiniz (private).
+
+Örnek: 
+
+	var (
+		name    = "example"
+		Version = "0.0.1"
+	)
+
+	func add(x, y int) int { 
+		return x + y 
+	}
+
+	func Multiply(x, y int) int { return x * y }
+
+
 * Go sözdizimi ve temel dil yapısı
 
 * Türler
 
 .play code/data/data.go /START OMIT/,/END OMIT/
 
-* Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler
-
-Tanımlanmayan değişkenler, öntanımlı olarak o türün sıfır değerini alır.
-
-	var a int
-	fmt.Println(a) // a: 0
-
-Fonksiyon girdilerini türe göre gruplayabilirsiniz.
-
-	func foo(x, y, z int) int {}
-	func bar(a int, b, c string) int {}
-
-Birden fazla sonuç dönebiliriz 
-
-	func foo() (int, bool) {}
-	func bar() (string, string, float64) {}
-
-
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler (örnek)
+
+- Tanımlanmayan değişkenler, öntanımlı olarak o türün sıfır değerini alır.
+- Birden fazla sonuç dönebiliriz 
 
 .play code/vars/vars.go /START OMIT/,/END OMIT/
 
@@ -447,27 +406,81 @@ Windows ANSI desteklemiyor. Çözüm:
 * Concurrency
 .image concurrency.jpg
 
+
+* Eşzamanlılık nedir?
+
+Birbirinden bağımsız çalışmaların bir araya gelmesi, birleşmesi.
+
+Parallelik *değildir*
+
+Sadece bir işlemciniz varsa uygulamanız hala eşzamanlı çalışabilir, ama parallel çalışamaz.
+
+Daha fazla bilgi için: http://golang.org/s/concurrency-is-not-parallelism
+
+
+* Sıkıcı bir uygulama
+
+Go'nun eşzamanlı özelliklerini sıkıcı bir uygulama üzerinden anlatalım.
+
+.code code/concurrency/boring.go /START/,/STOP.*/
+
+* Biraz daha az sıkıcı
+
+Zamanlamayı biraz tahmin edilemeyecek şekilde yapalim (hala bir saniyenin altında)
+
+.code code/concurrency/lessboring.go /START/,/STOP/
+
+* Çalıştıralım
+
+Bu sıkıcı uygulama sonsuza kadar çalışıyor.
+
+.play code/concurrency/lessboring.go /^func.main/,$
+
+* Ihmal edelim
+
+go kelimesi normal fonksiyon gibi çalışır, sadece kendisini çağıranı bekletmez.
+
+Bir tane goroutine çalıştırıyor.
+
+Betik komutunun sonuna & konulmuş gibi düşünebilirsiniz.
+
+.play code/concurrency/goboring.go 1,/^}/
+
+* Biraz az ihmal edelim
+
+Main fonksiyonu bittiğinde uygulama kapanıyor, onunla birlikte sıkıcı uygulamamız da bitiyor.
+
+Biraz daha durabiliriz, böylelikle main fonksiyonu ve çalıştırdığımız goroutine çalıştığını görebiliriz.
+
+.play code/concurrency/waitgoboring.go /func.main/,/^}/
+
 * Goroutine
 
-Goroutine eş zamanlı olarak aynı adres uzayında bağımsız olarak çalışabilen
-fonksiyonlara denir.
+Goroutine nedir? Goroutine, go kelimesi ile başlatılan ve bağımsız çalışan bir fonksiyondur.
 
-*go* kelimesi ile yeni bir goroutine başlatılır
+Çok ucuz, binlerce, hatta yüz binlerce çağırabiliriz.
 
-	go f(x, y, z)
+Thread *değildir*. (Işletim sistemi seviyesinde değil)
 
-* Goroutine (devam)
+Bir tane thread altında binlerce goroutine çalışabilir.
 
-Öntanımlı olarak her fonksiyon çağrısı **blocking*
+Çok ucuz bir thread gibi düşünebilirsiniz.
 
-*Nonblocking* yapmak için tek yapmamız gereken önüne *go* keywordunu yerleştirmek.
+* İletişim
 
-.play -edit code/goroutine/goroutine.go /START OMIT/,/END OMIT/
+Önceki sıkıcı uygulamamız sadece çıktı üretmişti.
 
+Halbuki iletişim için girdiye ihtiyac vardır.
+
+Goroutine'ler arasında iletişim nasıl olur?
+
+- Don't communicate by sharing memory; share memory by communicating.
 
 * Channels
 
-- Don't communicate by sharing memory; share memory by communicating.
+Kanallar iki goroutine'nin arasinda bir bağlantı sağlayarak, iletişim
+yapmalarını sağlarlar.
+
 
 Kanal oluşturma:
 
@@ -475,26 +488,12 @@ Kanal oluşturma:
 
 Veri göndermek:
 
-	ch <- v
+	ch <- 5
 
-Veri almak:
+Veri almak (ok işareti verinin yönünü gösteriyor):
 
-	v := <-ch
+	v = <-ch
 
-
-* Channels (devam)
-
-İki goroutine fonksiyonu arasındaki iletişim nasıl olur ?
-
-- Ortak bir veri üzerinden (bellek, sharing state)
-- Ortak bir iletişim kanalından
-
-Bellek üzerinden veri paylaşım ölçeklenebilir değil ve sorunlara yol açıyor.
-
-Veri iletişim yollarından paylaşılmalı.
-
-Kanallar (channels) iki eşzamanlı fonksiyonun kendi aralarında etkileşimi
-senkronize etmeye yarayan bir veri yapısıdır.
 
 * Channels (devam)
 
@@ -503,49 +502,15 @@ senkronize etmeye yarayan bir veri yapısıdır.
 Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
 bloklanır.
 
-Tamponlanmış kanallar ile bloklamaya ortadan kaldirabiliriz.
+* Devamı var...
 
-	ch := make(chan int, 100)
+Daha gelişmiş özelliklerimiz var. Bu konuşmanın dışında.
 
-* Range
+- Buffered Channels
 
-Verinin üzerinde dolaşmak (iteration) için gerekli
+- Range
 
-Range keywordu bir çok veri yapısı için kullanıllır
-
-- String (index, rune)
-- Array (index, value)
-- Slice (index, value)
-- Map (key, value)
-
-	for k, v := range ch { }
-
-- Channel (element)
-
-	for e := range ch { }
-
-* Range (devam)
-
-.play -edit code/range/range.go /START OMIT/,/END OMIT/
-
-* Select
-
-*select* deyimi bir "goroutine"nin birden fazla iletişim işleminde beklemesine
-izin verir.
-
-Veri alana veya gönderiline kadar bloklar.
-
-Default case eklendiyse doğrudan oraya düşer (advanced pattern)
-
-	select {
-	case data := <-connection:
-	case <-time.After(time.Second*30):
-	default:
-	}
-
-* Select (devam)
-
-.play -edit code/select/select.go /START OMIT/,/END OMIT/
+- Select
 
 * Araçlar
 
@@ -726,6 +691,7 @@ Slaytı hazırlarken aşağıdaki kaynaklardan faydalandım:
 - http://talks.golang.org/2012/splash.article
 - http://go-talks.appspot.com/github.com/golang/talks/2012/simple.slide
 - https://github.com/golangmedellin/gotalks
+- https://talks.golang.org/2012/concurrency.slide
 
 * Soru/Cevap
 
