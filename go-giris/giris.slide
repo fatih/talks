@@ -33,14 +33,6 @@ Koding'deki 200K Go kodu 11 saniye'de derleniyor (Macbook Pro)
 
 * Neden Go?
 
-- Kontrol altına alınamayan bağımlılıklar (C++ sorunları)
-
-.image dependencies.jpg
-
-Bağımlılıkları yönetmek kişiye bırakılıyor, merkezi paket yönetim yok.
-
-* Neden Go?
-
 - Insanların bir dilin özelliklerin belirli alt kümelerini kullanması
 
 .image rental.png
@@ -49,11 +41,19 @@ Go'da bir işi yapmanın genellikle sadece bir yolu vardır.
 
 * Neden Go?
 
+- Mevcut kodunuzu onlarca sunucuya sorunsuzca yerleştirmek
+
+.image deployment.jpg
+
+Go tek bir dosya'ya derleniyor. Bir tane binary'yi kopyalamak yeterli.
+
+* Neden Go?
+
 Karışık şöz dizimi kuralları
 
 .image syntax.jpg
 
-Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittikçe artıyor)
+Go'da sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittikçe artıyor)
 
 * Neden Go? (devam)
 
