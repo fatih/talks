@@ -56,15 +56,14 @@ Karışı şöz dizimi kuralları
 
 Sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı gittikçe artıyor)
 
-* Neden Go?
+* Neden Go? (devam)
 
-- Açık kaynak
 - Basit
 - Güncelleme güvenliği
 - Eşzamanlı (concurrency) 
 - Garbage collection
 - Static Typed
-- Dahili çözümler
+- Ve daha nicesi ...
 
 * Go ne değildir ve ne için kullanılmaz
 
@@ -677,24 +676,6 @@ Benchmark paketi `b.N` değerini fonksiyon düzgün çıktı verene kadar yükse
 	$ go test -test.bench=Index
 	PASS
 	BenchmarkIndex	50000000	        37.3 ns/op
-
-* Test (örnekler)
-
-`testing` paketi test edilebilen örnekleri de destekliyor.
-
-.code code/test/string_test.go /func ExampleIndex/,/^}/
-
-Örnekler mevcut testler gibi derlenip çalışıyor:
-
-	$ go test -v
-	=== RUN: ExampleIndex
-	--- PASS: ExampleIndex (0.00 seconds)
-	PASS
-
-
-Eklediğiniz örnekler `godoc` da demo olarak da gözükuyor:
-
-.link http://godoc.org/github.com/fatih/structs#pkg-examples
 
 
 * Editör desteği ve uyumluluğu
