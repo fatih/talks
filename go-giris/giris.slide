@@ -470,6 +470,27 @@ Point ve MyInt türlerine *Stringer* desteği verelim
 
 * Interfaces (Çevreleme örnek)
 
+Standart cıktıya bir sey yazdırmak.
+
+	fmt.Println(msg string)
+
+	// kullanım
+	fmt.Println("Gopher")
+
+Belirgin (explicit) olarak da ifade edebiliriz
+
+	fmt.Fprintln(w io.Writer, msg string)
+
+	// kullanım
+	fmt.Fprintln(os.Stdout, "Gopher")
+
+	// bunlar da geçerli
+	fmt.Fprintln(textFile, "Gopher")
+	fmt.Fprintln(connection, "Gopher")
+	fmt.Fprintln(os.Stderr, "Gopher")
+
+* Interfaces (Çevreleme örnek)
+
 Color paketi (https://github.com/fatih/color) sadece Linux/Mac OS X benzeri
 işletim sistemlerinde çalışıyordu (ANSI desteği olanlarda)
 
