@@ -36,8 +36,7 @@ func main() {
 	p := Point{3, 4}
 	m := MyInt(3)
 
-	fmt.Println(p)
-	fmt.Println(m)
+	fmt.Println(p, "\n", m)
 }
 
 // END OMIT

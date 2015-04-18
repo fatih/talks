@@ -425,8 +425,10 @@ Veri'ye erişmek için `.` operatörünü kullanıyoruz:
 
 * Methods
 
-Go'da Class yapısı bulunmaz. Ama metodlar ile bir *struct* türüne fonksiyonlar
-tanımlayabilirsiniz.
+Metodlar da birer fonksiyondur. Sadece fonksiyonlar farkli olarak _alıcıları_ vardır
+
+Go'da Class yapısı bulunmaz. Ama metodlar ile bir ana türü fonksiyonlar
+tanımlayabilirsiniz. Örnek bir *struct* türüne tanımlanmış metod:
 
 .play code/methods/methods.go /START OMIT/,/END OMIT/
 
@@ -457,15 +459,20 @@ Metodları tanımladığınız her türe tanımlayabilirsiniz.
 
 Arayüzler bir türün davranışını belirlememizi sağlar.
 
-Eğer bir tür bir şeyi (method) yapıyorsa, onu başka bir yerde kullanabiliriz.
+Interface tanımlaması sıfır, bir veya birden fazla *metod* ile tanımlanır:
 
-Interface tanımlaması bir veya birden fazla *metod* ile tanımlanır:
+	interface{}  // boş interface
 
-Interface birden fazla methodu/özelliklerini sağlayan bir tür.
-
-	type Adder interface {
-		Add(int) int
+	interface {
+		Add(num int) int
 	}
+
+	interface {
+		Len() int
+		Swap(i, j int)
+		Less(i, j int) bool
+	}
+
 
 Bir tür, interface ile tanımlanan metodları tanımlıyorsa (implement) o
 interface'i örtülü (implicit) gerçekleştirir
@@ -475,13 +482,9 @@ interface'i örtülü (implicit) gerçekleştirir
 
 Point ve MyInt türleri *Add* metodunu tanımlıyor
 
-	func (p Point) Add(a int) int {
-		return p.X + p.Y + a
-	}
+	func (p Point) Add(a int) int { return p.X + p.Y + a }
 
-	func (m MyInt) Add(a int) int {
-		return int(m) + a
-	}
+	func (m MyInt) Add(a int) int { return int(m) + a }
 
 Interface de bir tür olduğundan bir fonksiyona paslayabiliriz:
 
@@ -510,6 +513,8 @@ Herhangi bir türe HTTP serve desteği vermek
 	}
 
 * Interfaces (Stringer örneği)
+
+.play code/interfaces3/interfaces3.go /START OMIT/,/END OMIT/
 
 Point ve MyInt türlerine *Stringer* desteği verelim
 
