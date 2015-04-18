@@ -9,10 +9,12 @@ import (
 )
 
 func main() {
-	fmt.Println("I'm listening.")
+	fmt.Println("Bekliyorum...")
 	go boring("boring!")
+
 	time.Sleep(2 * time.Second)
-	fmt.Println("You're boring; I'm leaving.")
+
+	fmt.Println("Canım sıkıldı, ben çıkıyorum.")
 }
 
 // STOP OMIT
