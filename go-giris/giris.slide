@@ -148,6 +148,24 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 		return x * y 
 	}
 
+* Değişkenler
+
+- Statically typed:
+	var x int
+	var s, t string
+- Örtülu (implicit) ya da belirgin (explicit) ilklendirme (initialization):
+	var x int
+	var s, t string = "foo", "bar"  // multiple assignment
+
+	var x = 42                      // int
+	var s, b = "foo", true          // string, bool
+- Kısaltılmış değişken bildirimleri (sadece fonksiyonların içinde geçerli):
+	x := 42
+	s, b := "foo", true
+- Adresini almak mümkün (tipki C'deki gibi)
+	return &x
+# compiler will do the right thing
+
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler (örnek)
 
 - Tanımlanmayan değişkenler, öntanımlı olarak o türün sıfır değerini alır.
@@ -309,6 +327,24 @@ Mevcut tüm projeler için çalıştırmak için:
 
 * Türler
 
+- Basit türler:
+	uint8 (byte), uint16, uint32, uint32, uint64,
+	int8, int16, int32, int32 (rune), int64,
+	float32, float64,
+	complex64, complex128,
+	uint, int, uintptr,
+	bool, string,
+	error  // not so usual
+
+- Birleşik (composite) türler:
+	array, struct, pointer, function,
+	slice, map, channel
+
+- Soyut tür:
+	interface
+
+* Türler (devamı)
+
 .play code/data/data.go /START OMIT/,/END OMIT/
 
 * Akış kontrolleri
@@ -345,7 +381,27 @@ Anonim fonksiyonlar
 
 * Fonksiyonlar (devam)
 
+- Düz fonksiyonlar
+	func Sin(x float64) float64
+	func AddScale(x, y int, f float64) int
+
+- Coklu sonuçlar 
+	func Write(data []byte) (int, error)
+
+- Belirsiz sayıda parametre (variadic arguments)
+	func Printf(format string, args ...interface{})
+	
+	// örnek kullanım
+	fmt.Printf("Hello %s: %d", "fatih", 2015)
+
+- Birinci sınıf fonksıyonlar
+	var delta int
+	return func(x int) int { return x + delta }
+
+* Fonksiyonlar (devam)
+
 .play code/funcs/funcs.go /START OMIT/,/END OMIT/
+
 
 * Structs
 
