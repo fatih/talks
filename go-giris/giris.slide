@@ -1,5 +1,5 @@
 Go programlama dili
-28 Mart 2015
+25 Nisan 2015
 
 Fatih Arslan
 Software Engineer at Koding, Gopher, Coffee Geek
@@ -137,16 +137,16 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
 Örnek: 
 
-	var (
-		name    = "example"
-		Version = "0.0.1"
-	)
+	var name string = "example"
+	var Version string = "0.0.1"
 
 	func add(x, y int) int { 
 		return x + y 
 	}
 
-	func Multiply(x, y int) int { return x * y }
+	func Multiply(x, y int) int { 
+		return x * y 
+	}
 
 * Değişkenler, çoklu sonuçlar, sıfır değerler, sabitler (örnek)
 
