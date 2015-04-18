@@ -533,22 +533,26 @@ Point ve MyInt türlerine *Stringer* desteği verelim
 
 Standart cıktıya bir sey yazdırmak.
 
-	fmt.Println(msg string)
+	fmt.Println(a ...interface{})
 
 	// kullanım
-	fmt.Println("Gopher")
+	fmt.Println("Gopher", "Arslan")
 
 Belirgin (explicit) olarak da ifade edebiliriz
 
-	fmt.Fprintln(w io.Writer, msg string)
+	fmt.Fprintln(w io.Writer, a ...interface{})
 
-	// kullanım
-	fmt.Fprintln(os.Stdout, "Gopher")
+Örnek kullanımlar:
 
-	// bunlar da geçerli
-	fmt.Fprintln(textFile, "Gopher")
-	fmt.Fprintln(connection, "Gopher")
-	fmt.Fprintln(os.Stderr, "Gopher")
+	file, _ := os.Create("tempfile.txt") // *os.File
+	fmt.Fprintln(file, "Gopher")
+
+	connection, _ := net.Dial("tcp", "127.0.0.1:3000") // net.Conn
+	fmt.Fprintln(connection, "Gopher", "Arslan")
+
+	var output string
+	buffer := buffer.NewBufferString(output) // *buffer.Buffer
+	fmt.Fprintln(buffer, "Gopher")
 
 * Interfaces (Çevreleme örnek)
 
