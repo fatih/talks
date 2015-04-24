@@ -11,9 +11,9 @@ import (
 var b = time.Second
 
 // START OMIT
-func fibonacci(c chan int) {
+func fibonacci(n int, c chan int) {
 	x, y := 0, 1
-	for i := 0; i < 7; i++ {
+	for i := 0; i < n; i++ {
 		c <- x
 		// slow producer
 		// time.Sleep(time.Millisecond * 300)
@@ -24,9 +24,10 @@ func fibonacci(c chan int) {
 }
 
 func main() {
-	c := make(chan int)
+	bufSize := 7                 // HL
+	c := make(chan int, bufSize) // HL
 
-	go fibonacci(c) // collect numbers
+	go fibonacci(bufSize, c) // collect numbers
 
 	for i := range c {
 		// slow consumer

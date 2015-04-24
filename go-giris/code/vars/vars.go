@@ -10,7 +10,6 @@ const aciklama = "Örnek bir Go uygulamasi"
 func hesapla(x, y, z int) (int, bool) {
 	var a int = x + y + z
 	b := 20 < a
-
 	return a, b
 }
 

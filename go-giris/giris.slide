@@ -204,7 +204,7 @@ Go'da
 
 Go kodunu inşa etmek ve kurmak için `go` aracı kullanmak gerekiyor
 
-Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştiriyor:
+Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştırıyor:
 
 	$ go run hello.go
 
@@ -368,9 +368,29 @@ defer deyimi, kendisini çevreleyen fonksiyon dönene kadar fonksiyonun
 
 .play code/defer/defer.go
 
+* Range
+
+- String (index, rune)
+
+	for rune := range "Fatih" { 
+		fmt.Println(rune)
+	}
+
+- Slice (index, value)
+	for i, item := range items { }
+	for item := range items { }
+
+- Map (key, value)
+
+	for k, v := range map { }
+
+- Channel (element)
+
+	for e := range ch { }
+
 * Fonksiyonlar
 
-Birinci sınıf functions
+Birinci sınıf fonksiyonlar
 
 Fonksiyonlar da bir türdür
 
@@ -391,7 +411,7 @@ Anonim fonksiyonlar
 	// örnek kullanım
 	fmt.Printf("Hello %s: %d", "fatih", 2015)
 
-- Birinci sınıf fonksıyonlar
+- Birinci sınıf fonksiyonlar
 	var delta int
 	return func(x int) int { return x + delta }
 
@@ -422,7 +442,7 @@ Veri'ye erişmek için `.` operatörünü kullanıyoruz:
 
 * Methods
 
-Metodlar da birer fonksiyondur. Sadece fonksiyonlar farkli olarak _alıcıları_ vardır
+Metodlar da birer fonksiyondur. Sadece fonksiyonlardan farklı olarak _alıcıları_ vardır
 
 Go'da Class yapısı bulunmaz. Ama metodlar ile bir ana türü fonksiyonlar
 tanımlayabilirsiniz. Örnek bir *struct* türüne tanımlanmış metod:
@@ -664,6 +684,53 @@ Veri almak (ok işareti verinin yönünü gösteriyor):
 
 Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
 bloklanır.
+
+
+* Channels (senkronizasyon)
+
+- When the main function executes <–c, it will wait for a value to be sent.
+- Similarly, when the boring function executes c <– value, it waits for a receiver to be ready.
+- A sender and receiver must both be ready to play their part in the communication. Otherwise we wait until they are.
+
+- Thus channels both communicate and synchronize.
+
+
+* Fibonnaci üreticisi ve alıcısı
+
+.play -edit code/range/range.go /START OMIT/,/END OMIT/
+
+* Tamponlanmış kanallar (Buffered Channels)
+
+- Tamponlanmış bir kanal aradaki senkronizasyon'u kaldırır.
+- Posta kutusu gibi, belirli bir hacmi var. Dolduğunda boşalmasını beklemeniz gerekiyor.
+
+
+Kapasitesi 10 olan bir kanal:
+
+	ch := make(chan int, 10)
+
+* Fibonnaci (buffered)
+
+.play -edit code/bufferedchannels/bufferedchannels.go /START OMIT/,/END OMIT/
+
+* Select
+
+*select* deyimi bir "goroutine"nin birden fazla iletişim işleminde beklemesine
+izin verir.
+
+Veri alana veya gönderiline kadar bloklar.
+
+Default case eklendiyse doğrudan oraya düşer (advanced pattern)
+
+	select {
+	case v1 := <-chan1:
+	case chan3 <- v3:
+	default:
+	}
+
+* Select (devam)
+
+.play -edit code/select/select.go /START OMIT/,/END OMIT/
 
 * Devamı var...
 
