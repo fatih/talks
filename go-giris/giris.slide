@@ -1,5 +1,5 @@
 Go programlama dili
-25 Nisan 2015
+26 Nisan 2015
 
 Fatih Arslan
 Software Engineer at Koding, Gopher, Coffee Geek
@@ -87,9 +87,6 @@ Go'da sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı g
 
 
 * İlk Go uygulamamız
-
-Bir Go uygulaması main paketi ile ayağa kalkar ve çalışır. Diğer hiç bir paket
-kendi başına çalışmaz.
 
 .play code/main.go
 
