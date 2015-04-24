@@ -732,17 +732,6 @@ Default case eklendiyse doğrudan oraya düşer (advanced pattern)
 
 .play -edit code/select/select.go /START OMIT/,/END OMIT/
 
-* Devamı var...
-
-Daha gelişmiş özelliklerimiz var. Bu konuşmanın dışında.
-
-- Buffered Channels
-
-- Range
-
-- Select
-
-
 * Nasıl Go öğrenmeye başlayabilirim?
 
 Türkçe turumuz (Ondokuz Mayıs Üniversitesi'nin katkılarıyla)
