@@ -1,8 +1,8 @@
 Go programlama dili
-26 Nisan 2015
+28 Kasım 2015
 
 Fatih Arslan
-Software Engineer at Koding, Gopher, Coffee Geek
+Software Engineer at Koding
 https://github.com/fatih
 fatih@arslan.io
 @ftharsln
@@ -92,7 +92,6 @@ Go'da sadece 25 tane keyword var (C99 de 37 tane var; C++11 de 84 var ve sayı g
 
 * Paketler
 
-
 Her Go uygulaması paketlerden oluşur. 
 
 Paketler ne içerir ? 
@@ -122,8 +121,7 @@ Başka paketleri kullanabilmek icin *import* ile dahil etmek gerekiyor.
 
 		color.Red("Error message")
 
-		l := log.NewLogger("app")
-		l.Info("App started")
+		log.Info("App started")
 	}
 
 
