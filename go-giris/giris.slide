@@ -206,10 +206,10 @@ Bir tane dosya (main paketli) çalıştırmak için. Derleyip calıştırıyor:
 
 	$ go run hello.go
 
-Mevcut klasördeki paketi derleyip kurmak için:
+Mevcut dizindeki paketi derlemek icin:
 
-	$ go install
-	$ go install github.com/jgrahamc/httpdiff
+	$ go build
+	$ ./hello
 
 Go aracı diğer tüm Go araçları için aynı zamanda bir proxy görevi yapıyor. Yani
 onun sayesinde diğer gerekli araçları çağırabilirsiniz (örneğin: go tool
@@ -625,7 +625,7 @@ Bir tane goroutine çalıştırıyor.
 
 Betik komutunun sonuna & konulmuş gibi düşünebilirsiniz.
 
-.play code/concurrency/goboring.go 1,/^}/
+.play code/concurrency/goboring.go /func.main/,/^}/
 
 * Arka plana atalım (devamı)
 
@@ -682,16 +682,6 @@ Veri almak (ok işareti verinin yönünü gösteriyor):
 
 Öntanımlı olarak veri gönderirken de alırken de karşı taraf hazır olana kadar
 bloklanır.
-
-
-* Channels (senkronizasyon)
-
-- When the main function executes <–c, it will wait for a value to be sent.
-- Similarly, when the boring function executes c <– value, it waits for a receiver to be ready.
-- A sender and receiver must both be ready to play their part in the communication. Otherwise we wait until they are.
-
-- Thus channels both communicate and synchronize.
-
 
 * Fibonnaci üreticisi ve alıcısı
 
